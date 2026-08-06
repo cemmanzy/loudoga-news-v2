@@ -56,16 +56,32 @@ export default function Homepage({
 
         </div>
 
-        <TrendingNews articles={trending} />
+        <div className="mt-16">
 
-        {sections.map((section) => (
-          <CategorySection
-            key={section.slug}
-            title={section.title}
-            href={`/category/${section.slug}`}
-            articles={section.articles}
-          />
-        ))}
+  {sections.map((section, index) => (
+
+    <div
+      key={section.slug}
+      className={index === 0 ? "" : "mt-20 border-t border-gray-200 pt-16"}
+    >
+
+      <CategorySection
+        title={section.title}
+        href={`/category/${section.slug}`}
+        articles={section.articles}
+      />
+
+    </div>
+
+  ))}
+
+</div>
+
+<div className="mt-20">
+
+  <TrendingNews articles={trending} />
+
+</div>
 
       </Container>
     </>

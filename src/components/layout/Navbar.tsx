@@ -1,36 +1,17 @@
-import Link from "next/link";
-
 import { getMenu } from "@/sanity/loaders/menu";
 
-import MenuItem from "./MenuItem";
+import DesktopNavbar from "./DesktopNavbar";
+import MobileNavbar from "./MobileNavbar";
 
 export default async function Navbar() {
   const menu = await getMenu();
 
   return (
-    <nav className="relative z-50 border-b bg-white">
+    <nav className="relative z-[9999] border-b bg-white">
 
-      <div className="mx-auto flex max-w-7xl items-center gap-8 px-4 py-4 text-sm font-semibold">
+      <DesktopNavbar menu={menu} />
 
-        <Link
-          href="/"
-          className="whitespace-nowrap transition hover:text-[#C8102E]"
-        >
-          Home
-        </Link>
-
-        {menu.map((category) => (
-
-          <MenuItem
-            key={category._id}
-            title={category.title}
-            slug={category.slug}
-            articles={category.articles}
-          />
-
-        ))}
-
-      </div>
+      <MobileNavbar menu={menu} />
 
     </nav>
   );

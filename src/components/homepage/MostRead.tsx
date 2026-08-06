@@ -12,23 +12,31 @@ export default function MostRead({
   articles,
 }: Props) {
   return (
-    <aside className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+    <aside className="sticky top-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
 
-      <h2 className="mb-6 border-l-4 border-[#C8102E] pl-3 text-2xl font-bold text-gray-900">
-        Most Read
-      </h2>
+      <div className="mb-6 flex items-center justify-between">
 
-      <div className="space-y-6">
+        <h2 className="border-l-4 border-[#C8102E] pl-3 text-2xl font-bold text-gray-900">
+          Most Read
+        </h2>
+
+        <span className="rounded-full bg-[#C8102E]/10 px-3 py-1 text-xs font-bold uppercase text-[#C8102E]">
+          Today
+        </span>
+
+      </div>
+
+      <div className="space-y-5">
 
         {articles.map((article, index) => (
 
           <Link
             key={article.slug}
             href={`/article/${article.slug}`}
-            className="group flex gap-4 rounded-lg p-2 transition hover:bg-gray-50"
+            className="group flex gap-4 rounded-xl border-b border-gray-100 pb-5 transition hover:bg-gray-50 last:border-b-0"
           >
 
-            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#C99700] text-lg font-black text-white">
+            <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#C8102E] text-xl font-black text-white">
 
               {index + 1}
 
@@ -36,17 +44,17 @@ export default function MostRead({
 
             <div className="flex-1">
 
-              <h3 className="font-semibold leading-6 text-gray-900 transition group-hover:text-[#C8102E]">
+              <h3 className="font-bold leading-6 text-gray-900 transition group-hover:text-[#C8102E]">
 
                 {article.title}
 
               </h3>
 
-              <p className="mt-2 text-xs text-gray-500">
+              <div className="mt-3 flex items-center gap-2 text-xs text-gray-500">
 
-                {article.views.toLocaleString()} views
+                <span>{article.views.toLocaleString()} views</span>
 
-              </p>
+              </div>
 
             </div>
 

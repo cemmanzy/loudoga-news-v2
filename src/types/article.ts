@@ -36,13 +36,15 @@ export interface Article {
   breaking: boolean;
 
   featuredImage?: {
-    image: any;
-    caption?: string;
-    photoCredit?: string;
-    alt?: string;
-  };
+  image: any;
+  caption?: string;
+  photoCredit?: string;
+  alt?: string;
+};
 
-  author: Author;
+imageUrl?: string;
+
+author: Author;
 
   categories: Category[];
 }

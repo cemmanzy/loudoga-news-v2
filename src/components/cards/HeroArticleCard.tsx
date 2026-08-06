@@ -22,7 +22,7 @@ export default function HeroArticleCard({
           <img
   src={urlFor(article.featuredImage.image).width(1800).url()}
   alt={article.featuredImage?.alt || article.title}
-  className="h-[320px] w-full object-cover transition duration-700 group-hover:scale-105 md:h-[700px]"
+  className="h-[260px] w-full object-cover transition duration-700 group-hover:scale-105 md:h-[450px] lg:h-[480px]"
 />
         )}
 

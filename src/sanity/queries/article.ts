@@ -24,10 +24,12 @@ export const articleQuery = groq`
 
   featuredImage,
 
+  "imageUrl": featuredImage.image.asset->url,
+
   "author": author->{
-  name,
-  "slug": slug.current
-},
+    name,
+    "slug": slug.current
+  },
 
   "categories": categories[]->{
     title,

@@ -18,6 +18,7 @@ export const heroQuery = groq`
   name,
   "slug": slug.current
 },
+
   "categories": categories[]->{
     title,
     "slug": slug.current

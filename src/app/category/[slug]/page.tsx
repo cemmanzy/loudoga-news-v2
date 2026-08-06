@@ -15,9 +15,7 @@ export default async function Page({
 }: Props) {
   const { slug } = await params;
 
-  const articles = await getCategory(
-    slug.charAt(0).toUpperCase() + slug.slice(1)
-  );
+  const articles = await getCategory(slug);
 
   if (!articles.length) {
     notFound();

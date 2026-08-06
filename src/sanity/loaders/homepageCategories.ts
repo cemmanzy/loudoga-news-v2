@@ -8,7 +8,7 @@ export async function getHomepageCategories() {
     categories.map(async (category) => ({
       title: category.title,
       slug: category.slug,
-      articles: await getCategory(category.title),
+      articles: await getCategory(category.slug),
     }))
   );
 

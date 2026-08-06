@@ -3,14 +3,18 @@ import { groq } from "next-sanity";
 export const categoryQuery = groq`
 *[
   _type == "article" &&
-  $category in categories[]->title
+  $slug in categories[]->slug.current
 ]
-| order(publishedAt desc)[0...4]{
+| order(publishedAt desc){
 
   _id,
+
   title,
+
   "slug": slug.current,
+
   excerpt,
+
   publishedAt,
 
   featuredImage{

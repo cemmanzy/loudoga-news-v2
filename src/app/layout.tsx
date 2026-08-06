@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 
+import { siteConfig } from "@/config/site";
+
 import TopBar from "@/components/layout/TopBar";
 import Header from "@/components/layout/Header";
 import Navbar from "@/components/layout/Navbar";
@@ -19,12 +21,54 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+
   title: {
-    default: "Loudoga News",
-    template: "%s | Loudoga News",
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "Breaking news, politics, business, sports, entertainment and technology from Loudoga News.",
+
+  description: siteConfig.description,
+
+  keywords: [
+    "Nigeria News",
+    "Politics",
+    "Business",
+    "Sports",
+    "Technology",
+    "Entertainment",
+    "Breaking News",
+    "Loudoga News",
+  ],
+
+  openGraph: {
+    title: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    creator: siteConfig.twitter,
+    images: [siteConfig.ogImage],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
