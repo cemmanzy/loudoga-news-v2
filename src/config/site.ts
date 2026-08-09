@@ -8,5 +8,13 @@ export const siteConfig = {
 
   ogImage: "/og-image.jpg",
 
-  twitter: "@loudoganews",
+  twitter: "@loudoganewstv",
+
+  socials: {
+    facebook: "",
+    instagram: "",
+    youtube: "",
+    tiktok: "",
+    linkedin: "",
+  },
 };

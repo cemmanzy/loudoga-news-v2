@@ -1,4 +1,14 @@
-import Homepage from "@/components/search/SearchPage";
+import type { Metadata } from "next";
+
+import SearchPage from "@/components/search/SearchPage";
+
+export const metadata: Metadata = {
+  title: "Search",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 interface Props {
   searchParams: Promise<{
@@ -12,7 +22,7 @@ export default async function Search({
   const { q = "" } = await searchParams;
 
   return (
-    <Homepage
+    <SearchPage
       query={q}
     />
   );
