@@ -1,11 +1,11 @@
 import { sanityFetch } from "../lib/client";
-import { heroQuery } from "../queries/hero";
+import { exclusiveQuery } from "../queries/exclusive";
 
 import type { Article } from "@/types/article";
 
-export async function getHero(): Promise<Article | null> {
+export async function getExclusive(): Promise<Article[]> {
   return sanityFetch({
-    query: heroQuery,
+    query: exclusiveQuery,
     tags: ["article"],
   });
 }

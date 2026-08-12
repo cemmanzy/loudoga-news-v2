@@ -49,6 +49,8 @@ export default function SearchBox() {
         const data = await res.json();
 
         setResults(data);
+      } catch {
+        setResults([]);
       } finally {
         setLoading(false);
       }
@@ -58,11 +60,11 @@ export default function SearchBox() {
   }, [query]);
 
   return (
-    <div className="relative hidden lg:block w-[420px]">
+    <div className="relative z-[100] w-full lg:w-[420px]">
+      {/* Search Input */}
 
       <div className="flex items-center rounded-full border border-gray-300 bg-white px-4 py-3">
-
-        <FaSearch className="text-gray-500" />
+        <FaSearch className="flex-shrink-0 text-gray-500" />
 
         <input
           value={query}
@@ -77,31 +79,33 @@ export default function SearchBox() {
             }
           }}
           placeholder="Search news..."
-          className="ml-3 w-full bg-transparent outline-none"
+          className="ml-3 w-full min-w-0 bg-transparent outline-none"
         />
-
       </div>
 
+      {/* Loading */}
+
       {loading && (
-        <div className="absolute left-0 right-0 top-full z-50 mt-2 rounded-xl border bg-white p-4 text-center text-sm text-gray-500 shadow-xl">
+        <div className="absolute left-0 right-0 top-full z-[100] mt-2 rounded-xl border bg-white p-4 text-center text-sm text-gray-500 shadow-xl">
           Searching...
         </div>
       )}
 
+      {/* No Results */}
+
       {!loading &&
         query.trim().length >= 2 &&
         results.length === 0 && (
-          <div className="absolute left-0 right-0 top-full z-50 mt-2 rounded-xl border bg-white p-4 text-center text-sm text-gray-500 shadow-xl">
+          <div className="absolute left-0 right-0 top-full z-[100] mt-2 rounded-xl border bg-white p-4 text-center text-sm text-gray-500 shadow-xl">
             No articles found.
           </div>
         )}
 
+      {/* Search Results */}
+
       {!loading && results.length > 0 && (
-
-        <div className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[500px] overflow-y-auto rounded-xl border bg-white shadow-2xl">
-
+        <div className="absolute left-0 right-0 top-full z-[100] mt-2 max-h-[500px] overflow-y-auto rounded-xl border bg-white shadow-2xl">
           {results.map((article) => (
-
             <Link
               key={article._id}
               href={`/article/${article.slug}`}
@@ -111,45 +115,37 @@ export default function SearchBox() {
               }}
               className="flex items-start gap-4 border-b p-4 transition hover:bg-gray-50 last:border-b-0"
             >
-
               {article.featuredImage?.image && (
-
                 <img
-                  src={urlFor(article.featuredImage.image).width(200).url()}
+                  src={urlFor(article.featuredImage.image)
+                    .width(200)
+                    .url()}
                   alt={article.title}
                   className="h-20 w-24 flex-shrink-0 rounded-lg object-cover"
                 />
-
               )}
 
-              <div className="flex flex-1 flex-col justify-center min-w-0">
-
+              <div className="flex min-w-0 flex-1 flex-col justify-center">
                 {article.categories?.[0] && (
-
                   <p className="mb-1 text-xs font-bold uppercase tracking-wide text-[#C8102E]">
                     {article.categories[0].title}
                   </p>
-
                 )}
 
                 <h3 className="line-clamp-2 font-semibold text-gray-900">
                   {article.title}
                 </h3>
 
-                <p className="mt-2 line-clamp-2 text-sm text-gray-500">
-                  {article.excerpt}
-                </p>
-
+                {article.excerpt && (
+                  <p className="mt-2 line-clamp-2 text-sm text-gray-500">
+                    {article.excerpt}
+                  </p>
+                )}
               </div>
-
             </Link>
-
           ))}
-
         </div>
-
       )}
-
     </div>
   );
 }

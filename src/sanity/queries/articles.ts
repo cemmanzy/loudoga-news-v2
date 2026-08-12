@@ -31,3 +31,21 @@ export const articlesQuery = groq`
 
 }
 `;
+
+export const recentArticlesForNewsletterQuery = groq`
+  *[
+    _type == "article" &&
+    defined(slug.current) &&
+    defined(publishedAt)
+  ]
+  | order(publishedAt desc)[0...5]{
+    _id,
+    title,
+    excerpt,
+    "slug": slug.current,
+    publishedAt,
+    "categories": categories[]->{
+      title
+    }
+  }
+`;

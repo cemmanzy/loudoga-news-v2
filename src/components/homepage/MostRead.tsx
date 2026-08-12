@@ -21,8 +21,8 @@ export default function MostRead({
         </h2>
 
         <span className="rounded-full bg-[#C8102E]/10 px-3 py-1 text-xs font-bold uppercase text-[#C8102E]">
-          Today
-        </span>
+  All Time
+</span>
 
       </div>
 
@@ -52,8 +52,10 @@ export default function MostRead({
 
               <div className="mt-3 flex items-center gap-2 text-xs text-gray-500">
 
-                <span>{article.views.toLocaleString()} views</span>
-
+                <span>
+  {article.views.toLocaleString()}{" "}
+  {article.views === 1 ? "view" : "views"}
+</span>
               </div>
 
             </div>

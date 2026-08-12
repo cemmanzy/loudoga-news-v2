@@ -1,11 +1,11 @@
 import { sanityFetch } from "../lib/client";
-import { heroQuery } from "../queries/hero";
+import { featuredQuery } from "../queries/featured";
 
 import type { Article } from "@/types/article";
 
-export async function getHero(): Promise<Article | null> {
+export async function getFeatured(): Promise<Article[]> {
   return sanityFetch({
-    query: heroQuery,
+    query: featuredQuery,
     tags: ["article"],
   });
 }

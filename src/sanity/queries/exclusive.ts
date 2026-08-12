@@ -1,17 +1,23 @@
 import { groq } from "next-sanity";
 
-export const heroQuery = groq`
+export const exclusiveQuery = groq`
   *[
     _type == "article" &&
-    heroStory == true
+    exclusive == true
   ]
-  | order(publishedAt desc)[0]{
+  | order(publishedAt desc)[0...6]{
     _id,
     title,
     "slug": slug.current,
     excerpt,
     publishedAt,
-    featuredImage,
+
+    featuredImage{
+      image,
+      caption,
+      photoCredit,
+      alt
+    },
 
     "author": author->{
       name,

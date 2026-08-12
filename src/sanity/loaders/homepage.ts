@@ -4,6 +4,9 @@ import { getMostRead } from "./mostRead";
 import { getHomepageCategories } from "./homepageCategories";
 import { getBreaking } from "./breaking";
 import { getTrending } from "./trending";
+import { getFeatured } from "./featured";
+import { getEditorsPick } from "./editorsPick";
+import { getExclusive } from "./exclusive";
 
 export async function getHomepage() {
   const [
@@ -13,6 +16,9 @@ export async function getHomepage() {
     sections,
     breaking,
     trending,
+    featured,
+    editorsPick,
+    exclusive,
   ] = await Promise.all([
     getHero(),
     getLatest(),
@@ -20,6 +26,9 @@ export async function getHomepage() {
     getHomepageCategories(),
     getBreaking(),
     getTrending(),
+    getFeatured(),
+    getEditorsPick(),
+    getExclusive(),
   ]);
 
   return {
@@ -29,5 +38,8 @@ export async function getHomepage() {
     sections,
     breaking,
     trending,
+    featured,
+    editorsPick,
+    exclusive,
   };
 }

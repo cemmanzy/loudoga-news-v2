@@ -7,12 +7,10 @@ export default async function Navbar() {
   const menu = await getMenu();
 
   return (
-    <nav className="relative z-[9999] border-b bg-white">
-
+    <nav className="relative z-10 border-y border-gray-200 bg-white">
       <DesktopNavbar menu={menu} />
 
       <MobileNavbar menu={menu} />
-
     </nav>
   );
 }

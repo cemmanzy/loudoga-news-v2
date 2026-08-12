@@ -4,6 +4,8 @@ import { articleType } from "./documents/article";
 import { authorType } from "./documents/author";
 import { categoryType } from "./documents/category";
 import { tagType } from "./documents/tag";
+import { subscriberType } from "./subscriber";
+import { newsletterType } from "./newsletter";
 
 import { seoType } from "./objects/seo";
 import { socialLinkType } from "./objects/socialLink";
@@ -23,5 +25,12 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     socialLinkType,
     imageWithCaptionType,
     siteSettingsType,
+
+    //Email Subscriber
+    subscriberType,
+
+
+    // Newsletter
+    newsletterType, 
   ],
 };

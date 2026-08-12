@@ -19,6 +19,7 @@ import ArticleSidebar from "@/components/article/ArticleSidebar";
 import Breadcrumbs from "@/components/article/Breadcrumbs";
 import ArticleStructuredData from "@/components/article/ArticleStructuredData";
 import BreadcrumbStructuredData from "@/components/article/BreadcrumbStructuredData";
+import ArticleViewTracker from "@/components/article/ArticleViewTracker";
 
 interface Props {
   params: Promise<{
@@ -128,6 +129,8 @@ export default async function ArticlePage({
   return (
     <>
   {/* Article JSON-LD Structured Data */}
+
+  <ArticleViewTracker slug={article.slug} />
 
   <ArticleStructuredData
     title={article.title}
