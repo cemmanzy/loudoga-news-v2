@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@sanity/client";
+import { revalidateTag } from "next/cache";
 
 const writeClient = createClient({
   projectId:
@@ -67,6 +68,8 @@ export async function POST(request: Request) {
         views: updatedViews,
       })
       .commit();
+
+      revalidateTag("mostRead", "max");
 
     return NextResponse.json({
       success: true,
