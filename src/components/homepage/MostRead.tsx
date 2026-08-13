@@ -12,7 +12,7 @@ export default function MostRead({
   articles,
 }: Props) {
   return (
-    <aside className="sticky top-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+    <aside className="w-full rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6 lg:sticky lg:top-6">
 
       <div className="mb-6 flex items-center justify-between">
 

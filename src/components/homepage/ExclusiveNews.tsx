@@ -18,7 +18,7 @@ export default function ExclusiveNews({
         Exclusive
       </SectionTitle>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid w-full gap-6 md:grid-cols-2 lg:grid-cols-3">
         {articles.map((article) => (
           <RelatedArticleCard
             key={article._id}

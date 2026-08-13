@@ -27,19 +27,19 @@ export default function CategorySection({
         {title}
       </SectionTitle>
 
-      <div className="mt-8 grid gap-10 lg:grid-cols-[1.35fr_1fr]">
+      <div className="mt-8 grid w-full grid-cols-1 gap-10 lg:grid-cols-[1.35fr_1fr]">
 
         {/* Featured Story */}
 
         <Link
-          href={`/article/${featured.slug}`}
-          className="group"
-        >
+  href={`/article/${featured.slug}`}
+  className="group block w-full"
+>
           {featured.featuredImage?.image && (
             <img
               src={urlFor(featured.featuredImage.image).width(1000).url()}
               alt={featured.featuredImage.alt || featured.title}
-              className="h-80 w-full rounded-2xl object-cover transition duration-300 group-hover:scale-[1.02]"
+              className="h-64 w-full rounded-2xl object-cover transition duration-300 group-hover:scale-[1.02] sm:h-80"
             />
           )}
 
@@ -85,10 +85,10 @@ export default function CategorySection({
           {others.map((article) => (
 
             <Link
-              key={article._id}
-              href={`/article/${article.slug}`}
-              className="group flex gap-4 border-b border-gray-200 pb-5 last:border-b-0"
-            >
+  key={article._id}
+  href={`/article/${article.slug}`}
+  className="group flex w-full gap-4 border-b border-gray-200 pb-5 last:border-b-0"
+>
 
               {article.featuredImage?.image && (
                 <img

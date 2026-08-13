@@ -14,7 +14,10 @@ export default function HeroArticleCard({
   article,
 }: Props) {
   return (
-    <Link href={`/article/${article.slug}`}>
+    <Link
+  href={`/article/${article.slug}`}
+  className="block w-full"
+>
 
       <article className="group relative overflow-hidden rounded-3xl shadow-lg">
 

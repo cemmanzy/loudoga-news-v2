@@ -7,37 +7,25 @@ interface Props {
   articles: Article[];
 }
 
-export default function TrendingNews({
-  articles,
-}: Props) {
+export default function TrendingNews({ articles }: Props) {
   if (!articles.length) return null;
 
   return (
-    <section className="mt-20">
-
+    <section className="w-full">
       <SectionTitle>
-
         🔥 Trending News
-
       </SectionTitle>
 
-      <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
-
+      <div className="flex w-full gap-4 overflow-x-auto pb-4 scrollbar-hide">
         {articles.map((article) => (
-
           <div
             key={article._id}
-            className="min-w-[350px] max-w-[350px] flex-shrink-0"
+            className="min-w-[280px] max-w-[280px] flex-shrink-0 sm:min-w-[350px] sm:max-w-[350px]"
           >
-
             <RelatedArticleCard article={article} />
-
           </div>
-
         ))}
-
       </div>
-
     </section>
   );
 }

@@ -62,7 +62,7 @@ export default function Homepage({
     )}
 
     <Container className="my-16">
-      <div className="grid gap-10 lg:grid-cols-[2fr_1fr]">
+      <div className="grid min-w-0 grid-cols-1 gap-10 lg:grid-cols-[2fr_1fr]">
         <LatestNews articles={latest} />
 
         <MostRead articles={mostRead} />
