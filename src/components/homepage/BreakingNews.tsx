@@ -12,25 +12,23 @@ export default function BreakingNews({
   if (!articles.length) return null;
 
   return (
-    <div className="border-y bg-[#C8102E] text-white">
+    <div className="w-full overflow-hidden border-y bg-[#C8102E] text-white">
 
-      <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3">
+      <div className="mx-auto flex min-w-0 max-w-7xl items-center gap-3 px-3 py-3 sm:gap-4 sm:px-4">
 
-        <span className="rounded bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#C8102E]">
-
+        <span className="flex-shrink-0 rounded bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-[#C8102E] sm:px-3 sm:text-xs">
           Breaking
-
         </span>
 
-        <div className="flex-1 overflow-hidden">
+        <div className="min-w-0 flex-1 overflow-hidden">
 
-          <div className="flex gap-10 whitespace-nowrap animate-marquee">
+          <div className="flex min-w-max gap-10 whitespace-nowrap animate-marquee">
 
             {articles.map((article) => (
               <Link
                 key={article._id}
                 href={`/article/${article.slug}`}
-                className="hover:underline"
+                className="flex-shrink-0 hover:underline"
               >
                 {article.title}
               </Link>

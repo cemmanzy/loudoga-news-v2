@@ -6,29 +6,33 @@ import SearchBox from "../ui/SearchBox";
 
 export default function Header() {
   return (
-    <header className="relative z-50 bg-white">
+    <header className="relative z-50 overflow-x-clip bg-white">
       <Container>
-        <div className="flex flex-wrap items-center justify-between gap-4 py-4 lg:flex-nowrap lg:py-6">
+        <div className="flex flex-wrap items-center justify-between gap-4 py-4 md:py-5 lg:flex-nowrap lg:py-6">
+
           {/* Logo */}
 
-          <div className="flex-shrink-0">
+          <div className="min-w-0 max-w-full flex-1 lg:flex-none">
             <Logo />
           </div>
 
           {/* Right Side */}
 
-          <div className="flex w-full items-center justify-end gap-3 lg:w-auto lg:gap-5">
-            <div className="relative z-50 flex-1 lg:flex-none">
+          <div className="flex w-full min-w-0 items-center justify-end gap-3 lg:w-auto lg:flex-shrink-0 lg:gap-5">
+
+            <div className="relative z-50 min-w-0 flex-1 lg:flex-none">
               <SearchBox />
             </div>
 
             <Link
               href="/subscribe"
-              className="hidden rounded-full bg-[#C8102E] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#a90d27] md:inline-flex lg:px-6"
+              className="hidden flex-shrink-0 rounded-full bg-[#C8102E] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#a90d27] md:inline-flex lg:px-6"
             >
               Subscribe
             </Link>
+
           </div>
+
         </div>
       </Container>
     </header>

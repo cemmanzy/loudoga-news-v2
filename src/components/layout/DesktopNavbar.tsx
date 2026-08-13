@@ -17,7 +17,7 @@ export default function DesktopNavbar({
 
   return (
     <div className="hidden lg:block">
-      <div className="mx-auto max-w-7xl">
+      <div className="mx-auto hidden max-w-7xl lg:block">
         <div className="flex items-center gap-8 px-4 py-4 text-sm font-semibold">
 
           <Link

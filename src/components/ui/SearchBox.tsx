@@ -60,10 +60,10 @@ export default function SearchBox() {
   }, [query]);
 
   return (
-    <div className="relative z-[100] w-full lg:w-[420px]">
+    <div className="relative z-[100] min-w-0 w-full lg:w-[420px]">
       {/* Search Input */}
 
-      <div className="flex items-center rounded-full border border-gray-300 bg-white px-4 py-3">
+      <div className="flex min-w-0 items-center rounded-full border border-gray-300 bg-white px-4 py-3">
         <FaSearch className="flex-shrink-0 text-gray-500" />
 
         <input
