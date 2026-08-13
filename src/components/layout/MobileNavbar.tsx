@@ -2,16 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { FaBars, FaTimes } from "react-icons/fa";
-
-import type { MenuCategory } from "@/types/menu";
-
-import { socials } from "@/config/socials";
-
-
-
 
 import {
+  FaBars,
+  FaTimes,
   FaFacebookF,
   FaInstagram,
   FaYoutube,
@@ -19,13 +13,14 @@ import {
 
 import { FaXTwitter } from "react-icons/fa6";
 
+import type { MenuCategory } from "@/types/menu";
+import { socials } from "@/config/socials";
+
 interface Props {
   menu: MenuCategory[];
 }
 
-export default function MobileNavbar({
-  menu,
-}: Props) {
+export default function MobileNavbar({ menu }: Props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -40,16 +35,37 @@ export default function MobileNavbar({
     };
   }, [open]);
 
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  const closeMenu = () => {
+    setOpen(false);
+  };
+
   return (
     <>
-      {/* Mobile Navigation Bar */}
+      {/* ================================
+          MOBILE NAVIGATION BAR
+      ================================= */}
 
-      <div className="flex items-center justify-between px-4 py-4 lg:hidden">
-
+      <div className="flex w-full items-center justify-between px-4 py-4 lg:hidden">
         <button
+          type="button"
           onClick={() => setOpen(true)}
-          aria-label="Open Menu"
-          className="rounded-lg p-2 hover:bg-gray-100"
+          aria-label="Open navigation menu"
+          aria-expanded={open}
+          className="flex h-11 w-11 items-center justify-center rounded-lg text-gray-900 transition hover:bg-gray-100"
         >
           <FaBars className="text-2xl" />
         </button>
@@ -61,133 +77,140 @@ export default function MobileNavbar({
           LOUDOGA NEWS
         </Link>
 
-        <div className="w-8" />
+        <div className="h-11 w-11" />
       </div>
 
-      {/* Overlay */}
+      {/* ================================
+          DARK OVERLAY
+      ================================= */}
 
       <div
-        onClick={() => setOpen(false)}
-        className={`fixed inset-0 z-[9998] bg-black/50 transition-opacity duration-300 ${
+        aria-hidden={!open}
+        onClick={closeMenu}
+        className={`fixed inset-0 z-[9998] bg-black/60 transition-opacity duration-300 ${
           open
-            ? "opacity-100"
+            ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
         }`}
       />
 
-      {/* Drawer */}
+      {/* ================================
+          MOBILE DRAWER
+      ================================= */}
 
       <aside
-        className={`fixed left-0 top-0 z-[9999] h-screen w-[320px] overflow-y-auto bg-white shadow-2xl transition-transform duration-300 ${
-          open
-            ? "translate-x-0"
-            : "-translate-x-full"
+        aria-label="Mobile navigation"
+        className={`fixed left-0 top-0 z-[9999] flex h-[100dvh] w-[85vw] max-w-[360px] flex-col overflow-x-hidden overflow-y-auto bg-white shadow-2xl transition-transform duration-300 ease-out ${
+          open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* Header */}
+        {/* Drawer Header */}
 
-        <div className="flex items-center justify-between border-b p-5">
-
-          <h2 className="text-xl font-black text-[#C8102E]">
+        <div className="flex flex-shrink-0 items-center justify-between border-b border-gray-200 px-5 py-5">
+          <Link
+            href="/"
+            onClick={closeMenu}
+            className="text-xl font-black tracking-tight text-[#C8102E]"
+          >
             LOUDOGA NEWS
-          </h2>
+          </Link>
 
           <button
-            onClick={() => setOpen(false)}
-            aria-label="Close Menu"
-            className="rounded-lg p-2 hover:bg-gray-100"
+            type="button"
+            onClick={closeMenu}
+            aria-label="Close navigation menu"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-gray-800 transition hover:bg-gray-100"
           >
             <FaTimes className="text-xl" />
           </button>
-
         </div>
 
         {/* Menu */}
 
-        <nav className="py-2">
+        <nav className="flex-1 py-2">
+          {/* Home */}
 
           <Link
             href="/"
-            onClick={() => setOpen(false)}
-            className="block border-b px-6 py-4 font-semibold hover:bg-gray-50"
+            onClick={closeMenu}
+            className="flex min-h-[58px] items-center border-b border-gray-200 px-6 text-base font-semibold text-gray-900 transition hover:bg-gray-50 hover:text-[#C8102E]"
           >
             Home
           </Link>
+
+          {/* Categories */}
 
           {menu.map((category) => (
             <Link
               key={category._id}
               href={`/category/${category.slug}`}
-              onClick={() => setOpen(false)}
-              className="block border-b px-6 py-4 hover:bg-gray-50"
+              onClick={closeMenu}
+              className="flex min-h-[58px] items-center border-b border-gray-200 px-6 text-base font-medium uppercase tracking-wide text-gray-800 transition hover:bg-gray-50 hover:text-[#C8102E]"
             >
               {category.title}
             </Link>
           ))}
-
         </nav>
 
-        {/* Footer */}
+        {/* Drawer Footer */}
 
-<div className="border-t p-6">
+        <div className="flex-shrink-0 border-t border-gray-200 p-6">
+          <Link
+            href="/subscribe"
+            onClick={closeMenu}
+            className="block rounded-xl bg-[#C8102E] py-3.5 text-center font-bold text-white transition hover:bg-[#A90D27]"
+          >
+            Subscribe
+          </Link>
 
-  <Link
-    href="/subscribe"
-    onClick={() => setOpen(false)}
-    className="block rounded-xl bg-[#C8102E] py-3 text-center font-bold text-white transition hover:bg-[#a90d27]"
-  >
-    Subscribe
-  </Link>
+          {/* Social Icons */}
 
-  <div className="mt-8 flex justify-center gap-6 text-xl text-gray-600">
+          <div className="mt-7 flex justify-center gap-6 text-xl text-gray-600">
+            <a
+              href={socials.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="transition hover:text-[#1877F2]"
+            >
+              <FaFacebookF />
+            </a>
 
-  <a
-    href={socials.facebook}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Facebook"
-    className="transition hover:text-[#1877F2]"
-  >
-    <FaFacebookF />
-  </a>
+            <a
+              href={socials.x}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X"
+              className="transition hover:text-black"
+            >
+              <FaXTwitter />
+            </a>
 
-  <a
-    href={socials.x}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="X"
-    className="transition hover:text-black"
-  >
-    <FaXTwitter />
-  </a>
+            <a
+              href={socials.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="transition hover:text-pink-600"
+            >
+              <FaInstagram />
+            </a>
 
-  <a
-    href={socials.instagram}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Instagram"
-    className="transition hover:text-pink-600"
-  >
-    <FaInstagram />
-  </a>
+            <a
+              href={socials.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+              className="transition hover:text-red-600"
+            >
+              <FaYoutube />
+            </a>
+          </div>
 
-  <a
-    href={socials.youtube}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="YouTube"
-    className="transition hover:text-red-600"
-  >
-    <FaYoutube />
-  </a>
-
-</div>
-
-  <p className="mt-8 text-center text-sm text-gray-500">
-    © {new Date().getFullYear()} Loudoga News
-  </p>
-
-</div>
+          <p className="mt-7 text-center text-xs text-gray-500">
+            © {new Date().getFullYear()} Loudoga News
+          </p>
+        </div>
       </aside>
     </>
   );
