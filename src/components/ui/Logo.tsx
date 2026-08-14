@@ -6,15 +6,15 @@ interface LogoProps {
   size?: "sm" | "md" | "lg";
 }
 
-export default function Logo({
-  size = "lg",
-}: LogoProps) {
+export default function Logo({ size = "lg" }: LogoProps) {
   const config = {
     sm: {
       logo: 42,
       mic: 34,
       title: "text-xl",
       subtitle: "text-[10px]",
+      news: "px-1.5 py-0.5",
+      micIcon: 14,
     },
 
     md: {
@@ -22,6 +22,8 @@ export default function Logo({
       mic: 40,
       title: "text-3xl",
       subtitle: "text-xs",
+      news: "px-2 py-1",
+      micIcon: 17,
     },
 
     lg: {
@@ -29,6 +31,8 @@ export default function Logo({
       mic: 42,
       title: "text-5xl",
       subtitle: "text-sm",
+      news: "px-2 py-1",
+      micIcon: 20,
     },
   };
 
@@ -37,19 +41,14 @@ export default function Logo({
   return (
     <Link
       href="/"
-      className="
-        flex
-        items-center
-      "
+      className="flex items-center"
       aria-label="Loudoga News"
     >
-
-      {/* =====================================
-          BRAND ICON
-          ===================================== */}
+      {/* =================================
+          BRAND ICONS
+      ================================= */}
 
       <div className="flex items-center gap-1">
-
         {/* Microphone */}
 
         <div
@@ -61,6 +60,7 @@ export default function Logo({
             bg-[#C8102E]
             text-white
             shadow-sm
+            flex-shrink-0
           "
           style={{
             width: current.mic,
@@ -68,81 +68,58 @@ export default function Logo({
           }}
         >
           <FaMicrophoneAlt
-            size={
-              size === "lg"
-                ? 20
-                : size === "md"
-                ? 17
-                : 14
-            }
+            size={current.micIcon}
           />
         </div>
 
         {/* Fan Logo */}
 
         <Image
-          src="/images/loudoga-fan-logo.webp"
+          src="/images/loudoga-fan-logo-transparent.png"
           alt="Loudoga News logo"
           width={current.logo}
           height={current.logo}
           priority
-          className="
-            object-contain
-          "
+          className="object-contain flex-shrink-0"
         />
-
       </div>
 
-      {/* =====================================
+      {/* =================================
           BRAND NAME
-          ===================================== */}
+      ================================= */}
 
-      <div className="ml-1.5">
-
+      <div className="ml-1.5 min-w-0">
         <h1
           className={`
             ${current.title}
+            flex
+            items-center
+            whitespace-nowrap
             font-black
             leading-none
             tracking-tight
           `}
         >
-
-          {/* LOUD */}
-
           <span className="text-[#C99700]">
             LOUD
           </span>
 
-          {" "}
-
-          {/* OGA */}
-
-          <span
-            className="
-              text-[#111827]
-              dark:text-white
-            "
-          >
+          <span className="text-[#111827] dark:text-white">
             OGA
           </span>
 
-          {" "}
-
-          {/* NEWS */}
-
           <span
-            className="
+            className={`
+              ${current.news}
+              ml-1
               rounded
               bg-[#C8102E]
-              px-2
-              py-1
               text-white
-            "
+              leading-none
+            `}
           >
             NEWS
           </span>
-
         </h1>
 
         {/* Subtitle */}
@@ -151,16 +128,15 @@ export default function Logo({
           className={`
             ${current.subtitle}
             mt-1
+            whitespace-nowrap
             tracking-wide
             text-gray-500
-            dark:text-gray-300
+            dark:text-gray-400
           `}
         >
           Trusted Journalism • Breaking News
         </p>
-
       </div>
-
     </Link>
   );
 }

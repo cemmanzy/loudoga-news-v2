@@ -6,36 +6,46 @@ import SearchBox from "../ui/SearchBox";
 
 export default function Header() {
   return (
-    <header
-      className="
-        relative
-        z-50
-        bg-white
-        text-gray-900
-        transition-colors
-        duration-300
-        dark:bg-[#111827]
-        dark:text-white
-      "
-    >
+    <header className="relative z-50 bg-white dark:bg-[#0F172A]">
       <Container>
         <div
           className="
             flex
             items-center
             justify-between
-            gap-8
-            py-5
+            gap-4
+            py-4
+
+            sm:gap-6
+            sm:py-5
+
+            lg:gap-8
             lg:py-6
           "
         >
-          {/* Brand */}
+          {/* =================================
+              BRAND
+          ================================= */}
 
           <div className="min-w-0 flex-shrink-0">
-            <Logo size="lg" />
+
+            {/* Mobile / Small screens */}
+
+            <div className="block md:hidden">
+              <Logo size="md" />
+            </div>
+
+            {/* Desktop */}
+
+            <div className="hidden md:block">
+              <Logo size="lg" />
+            </div>
+
           </div>
 
-          {/* Search + Subscribe */}
+          {/* =================================
+              SEARCH + SUBSCRIBE
+          ================================= */}
 
           <div
             className="
@@ -47,13 +57,9 @@ export default function Header() {
               lg:justify-end
             "
           >
-            {/* Search */}
-
             <div className="w-full max-w-[420px]">
               <SearchBox />
             </div>
-
-            {/* Subscribe */}
 
             <Link
               href="/subscribe"

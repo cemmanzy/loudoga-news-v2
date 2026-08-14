@@ -28,18 +28,27 @@ export default function HorizontalArticleCard({
           bg-white
           transition-all
           duration-300
+
           hover:-translate-y-1
           hover:shadow-xl
+
+          dark:border-gray-700
+          dark:bg-[#111827]
+          dark:hover:bg-[#162033]
 
           sm:flex-row
         "
       >
 
-        {/* Image */}
+        {/* =====================================
+            IMAGE
+            ===================================== */}
 
         {article.featuredImage?.image && (
           <img
-            src={urlFor(article.featuredImage.image)
+            src={urlFor(
+              article.featuredImage.image
+            )
               .width(800)
               .url()}
             alt={
@@ -64,11 +73,26 @@ export default function HorizontalArticleCard({
           />
         )}
 
-        {/* Content */}
+        {/* =====================================
+            CONTENT
+            ===================================== */}
 
-        <div className="flex min-w-0 flex-1 flex-col p-4 sm:p-5 lg:p-6">
+        <div
+          className="
+            flex
+            min-w-0
+            flex-1
+            flex-col
+            p-4
 
-          {/* Category */}
+            sm:p-5
+            lg:p-6
+          "
+        >
+
+          {/* =================================
+              CATEGORY
+              ================================= */}
 
           {article.categories?.[0] && (
             <span
@@ -91,7 +115,9 @@ export default function HorizontalArticleCard({
             </span>
           )}
 
-          {/* Title */}
+          {/* =================================
+              TITLE
+              ================================= */}
 
           <h3
             className="
@@ -100,9 +126,13 @@ export default function HorizontalArticleCard({
               leading-tight
               text-gray-900
               transition
+
               group-hover:text-[#C8102E]
 
+              dark:text-white
+
               sm:text-2xl
+
               lg:text-[25px]
               lg:leading-[1.15]
             "
@@ -110,7 +140,9 @@ export default function HorizontalArticleCard({
             {article.title}
           </h3>
 
-          {/* Excerpt */}
+          {/* =================================
+              EXCERPT
+              ================================= */}
 
           {article.excerpt && (
             <p
@@ -121,6 +153,8 @@ export default function HorizontalArticleCard({
                 leading-6
                 text-gray-600
 
+                dark:text-gray-300
+
                 sm:text-[15px]
                 sm:leading-6
               "
@@ -129,7 +163,9 @@ export default function HorizontalArticleCard({
             </p>
           )}
 
-          {/* Meta */}
+          {/* =================================
+              META
+              ================================= */}
 
           <div
             className="
@@ -142,12 +178,21 @@ export default function HorizontalArticleCard({
               text-xs
               text-gray-500
 
+              dark:text-gray-400
+
               sm:gap-3
               sm:pt-5
               sm:text-sm
             "
           >
-            <span className="font-semibold text-gray-900">
+
+            <span
+              className="
+                font-semibold
+                text-gray-900
+                dark:text-gray-100
+              "
+            >
               {article.author?.name}
             </span>
 
@@ -156,15 +201,20 @@ export default function HorizontalArticleCard({
             <span>
               {new Date(
                 article.publishedAt
-              ).toLocaleDateString("en-US", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
+              ).toLocaleDateString(
+                "en-US",
+                {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                }
+              )}
             </span>
+
           </div>
 
         </div>
+
       </article>
     </Link>
   );

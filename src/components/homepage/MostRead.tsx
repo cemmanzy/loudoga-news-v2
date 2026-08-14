@@ -12,47 +12,149 @@ export default function MostRead({
   articles,
 }: Props) {
   return (
-    <aside className="w-full rounded-2xl border border-gray-200 bg-white p-4 shadow-sm sm:p-6 lg:sticky lg:top-6 lg:p-5">
+    <aside
+      className="
+        w-full
+        rounded-2xl
+        border
+        border-gray-200
+        bg-white
+        p-4
+        shadow-sm
+        transition-colors
+        duration-300
 
-      {/* Header */}
+        dark:border-gray-700
+        dark:bg-[#111827]
+
+        sm:p-6
+
+        lg:sticky
+        lg:top-6
+        lg:p-5
+      "
+    >
+
+      {/* =====================================
+          HEADER
+          ===================================== */}
+
       <div className="mb-4 flex items-center justify-between">
 
-        <h2 className="border-l-4 border-[#C8102E] pl-3 text-2xl font-bold leading-none text-gray-900">
+        <h2
+          className="
+            border-l-4
+            border-[#C8102E]
+            pl-3
+            text-2xl
+            font-bold
+            leading-none
+            text-gray-900
+            dark:text-white
+          "
+        >
           Most Read
         </h2>
 
-        <span className="rounded-full bg-[#C8102E]/10 px-3 py-1 text-xs font-bold uppercase text-[#C8102E]">
+        <span
+          className="
+            rounded-full
+            bg-[#C8102E]/10
+            px-3
+            py-1
+            text-xs
+            font-bold
+            uppercase
+            text-[#C8102E]
+          "
+        >
           All Time
         </span>
 
       </div>
 
-      {/* Articles */}
-      <div className="divide-y divide-gray-100">
+      {/* =====================================
+          ARTICLES
+          ===================================== */}
+
+      <div
+        className="
+          divide-y
+          divide-gray-100
+          dark:divide-gray-700
+        "
+      >
 
         {articles.map((article, index) => (
 
           <Link
             key={article.slug}
             href={`/article/${article.slug}`}
-            className="group flex gap-4 py-4 first:pt-2 last:pb-2"
+            className="
+              group
+              flex
+              gap-4
+              py-4
+              first:pt-2
+              last:pb-2
+            "
           >
 
-            {/* Number */}
-            <span className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#C8102E] text-xl font-black text-white">
+            {/* =================================
+                NUMBER
+                ================================= */}
+
+            <span
+              className="
+                flex
+                h-12
+                w-12
+                flex-shrink-0
+                items-center
+                justify-center
+                rounded-full
+                bg-[#C8102E]
+                text-xl
+                font-black
+                text-white
+              "
+            >
               {index + 1}
             </span>
 
-            {/* Content */}
+            {/* =================================
+                CONTENT
+                ================================= */}
+
             <div className="min-w-0 flex-1">
 
-              <h3 className="font-bold leading-5 text-gray-900 transition group-hover:text-[#C8102E]">
+              <h3
+                className="
+                  font-bold
+                  leading-5
+                  text-gray-900
+                  transition
+
+                  group-hover:text-[#C8102E]
+
+                  dark:text-white
+                "
+              >
                 {article.title}
               </h3>
 
-              <p className="mt-2 text-xs text-gray-500">
+              <p
+                className="
+                  mt-2
+                  text-xs
+                  text-gray-500
+                  dark:text-gray-400
+                "
+              >
                 {article.views.toLocaleString()}{" "}
-                {article.views === 1 ? "view" : "views"}
+                {article.views === 1
+                  ? "view"
+                  : "views"}
               </p>
 
             </div>

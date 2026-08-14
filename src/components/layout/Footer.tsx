@@ -37,7 +37,15 @@ export default async function Footer() {
   ]);
 
   return (
-    <footer className="mt-20 bg-[#0F172A] text-white">
+    <footer
+  className="
+    mt-20
+    border-t
+    border-gray-800
+    bg-[#0F172A]
+    text-white
+  "
+>
 
       {/* Main Footer */}
 

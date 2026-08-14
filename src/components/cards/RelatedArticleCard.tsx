@@ -24,17 +24,26 @@ export default function RelatedArticleCard({
         bg-white
         transition-all
         duration-300
+
         hover:-translate-y-1
         hover:shadow-xl
+
+        dark:border-gray-700
+        dark:bg-[#111827]
+        dark:hover:bg-[#162033]
       "
     >
 
-      {/* Image */}
+      {/* =====================================
+          IMAGE
+          ===================================== */}
 
       {article.featuredImage?.image && (
         <div className="overflow-hidden">
           <img
-            src={urlFor(article.featuredImage.image)
+            src={urlFor(
+              article.featuredImage.image
+            )
               .width(900)
               .url()}
             alt={
@@ -57,19 +66,42 @@ export default function RelatedArticleCard({
         </div>
       )}
 
-      {/* Content */}
+      {/* =====================================
+          CONTENT
+          ===================================== */}
 
-      <div className="flex min-h-[250px] flex-col p-4 sm:p-5">
+      <div
+        className="
+          flex
+          min-h-[250px]
+          flex-col
+          p-4
 
-        {/* Category */}
+          sm:p-5
+        "
+      >
+
+        {/* =================================
+            CATEGORY
+            ================================= */}
 
         {article.categories?.[0] && (
-          <span className="text-xs font-bold uppercase tracking-wide text-[#C8102E]">
+          <span
+            className="
+              text-xs
+              font-bold
+              uppercase
+              tracking-wide
+              text-[#C8102E]
+            "
+          >
             {article.categories[0].title}
           </span>
         )}
 
-        {/* Title */}
+        {/* =================================
+            TITLE
+            ================================= */}
 
         <h3
           className="
@@ -80,7 +112,10 @@ export default function RelatedArticleCard({
             leading-tight
             text-gray-900
             transition
+
             group-hover:text-[#C8102E]
+
+            dark:text-white
 
             sm:mt-3
             sm:text-xl
@@ -89,7 +124,9 @@ export default function RelatedArticleCard({
           {article.title}
         </h3>
 
-        {/* Excerpt */}
+        {/* =================================
+            EXCERPT
+            ================================= */}
 
         {article.excerpt && (
           <p
@@ -100,6 +137,8 @@ export default function RelatedArticleCard({
               leading-6
               text-gray-600
 
+              dark:text-gray-300
+
               sm:text-[15px]
               sm:leading-6
             "
@@ -108,7 +147,9 @@ export default function RelatedArticleCard({
           </p>
         )}
 
-        {/* Meta */}
+        {/* =================================
+            META
+            ================================= */}
 
         <div
           className="
@@ -122,22 +163,35 @@ export default function RelatedArticleCard({
             text-xs
             text-gray-500
 
+            dark:text-gray-400
+
             sm:text-sm
           "
         >
-          <span>
+
+          <span
+            className="
+              font-medium
+              text-gray-700
+              dark:text-gray-300
+            "
+          >
             {article.author?.name}
           </span>
 
           <span>
             {new Date(
               article.publishedAt
-            ).toLocaleDateString("en-US", {
-              day: "numeric",
-              month: "numeric",
-              year: "numeric",
-            })}
+            ).toLocaleDateString(
+              "en-US",
+              {
+                day: "numeric",
+                month: "numeric",
+                year: "numeric",
+              }
+            )}
           </span>
+
         </div>
 
       </div>

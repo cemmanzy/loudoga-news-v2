@@ -27,7 +27,9 @@ export default function CategorySection({
         {title}
       </SectionTitle>
 
-      {/* Featured only */}
+      {/* =====================================
+          FEATURED ONLY
+          ===================================== */}
 
       {others.length === 0 ? (
         <Link
@@ -37,7 +39,9 @@ export default function CategorySection({
           {featured.featuredImage?.image && (
             <div className="overflow-hidden rounded-2xl">
               <img
-                src={urlFor(featured.featuredImage.image)
+                src={urlFor(
+                  featured.featuredImage.image
+                )
                   .width(1400)
                   .url()}
                 alt={
@@ -60,6 +64,8 @@ export default function CategorySection({
             </div>
           )}
 
+          {/* Title */}
+
           <h2
             className="
               mt-5
@@ -67,8 +73,11 @@ export default function CategorySection({
               text-3xl
               font-extrabold
               leading-tight
+              text-gray-900
               transition
               group-hover:text-[#C8102E]
+
+              dark:text-white
 
               lg:text-4xl
             "
@@ -76,16 +85,45 @@ export default function CategorySection({
             {featured.title}
           </h2>
 
+          {/* Excerpt */}
+
           {featured.excerpt && (
-            <p className="mt-4 max-w-3xl line-clamp-3 leading-7 text-gray-600">
+            <p
+              className="
+                mt-4
+                max-w-3xl
+                line-clamp-3
+                leading-7
+                text-gray-600
+                dark:text-gray-300
+              "
+            >
               {featured.excerpt}
             </p>
           )}
 
-          <div className="mt-5 flex items-center gap-3 text-sm text-gray-500">
+          {/* Meta */}
+
+          <div
+            className="
+              mt-5
+              flex
+              items-center
+              gap-3
+              text-sm
+              text-gray-500
+              dark:text-gray-400
+            "
+          >
             {featured.author?.name && (
               <>
-                <span className="font-semibold">
+                <span
+                  className="
+                    font-semibold
+                    text-gray-700
+                    dark:text-gray-200
+                  "
+                >
                   {featured.author.name}
                 </span>
 
@@ -96,26 +134,44 @@ export default function CategorySection({
             <span>
               {new Date(
                 featured.publishedAt
-              ).toLocaleDateString("en-US", {
-                day: "numeric",
-                month: "short",
-                year: "numeric",
-              })}
+              ).toLocaleDateString(
+                "en-US",
+                {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                }
+              )}
             </span>
           </div>
         </Link>
       ) : (
 
-        /* Featured + supporting stories */
+        /* =====================================
+           FEATURED + SUPPORTING STORIES
+           ===================================== */
 
-        <div className="mt-8 grid w-full grid-cols-1 gap-10 lg:grid-cols-[1.35fr_1fr]">
+        <div
+          className="
+            mt-8
+            grid
+            w-full
+            grid-cols-1
+            gap-10
 
-          {/* Featured Story */}
+            lg:grid-cols-[1.35fr_1fr]
+          "
+        >
+
+          {/* =================================
+              FEATURED STORY
+              ================================= */}
 
           <Link
             href={`/article/${featured.slug}`}
             className="group block w-full"
           >
+
             {featured.featuredImage?.image && (
               <div className="overflow-hidden rounded-2xl">
                 <img
@@ -144,14 +200,19 @@ export default function CategorySection({
               </div>
             )}
 
+            {/* Title */}
+
             <h2
               className="
                 mt-5
                 text-3xl
                 font-extrabold
                 leading-tight
+                text-gray-900
                 transition
                 group-hover:text-[#C8102E]
+
+                dark:text-white
 
                 lg:text-4xl
               "
@@ -159,16 +220,44 @@ export default function CategorySection({
               {featured.title}
             </h2>
 
+            {/* Excerpt */}
+
             {featured.excerpt && (
-              <p className="mt-4 line-clamp-3 leading-7 text-gray-600">
+              <p
+                className="
+                  mt-4
+                  line-clamp-3
+                  leading-7
+                  text-gray-600
+                  dark:text-gray-300
+                "
+              >
                 {featured.excerpt}
               </p>
             )}
 
-            <div className="mt-5 flex items-center gap-3 text-sm text-gray-500">
+            {/* Meta */}
+
+            <div
+              className="
+                mt-5
+                flex
+                items-center
+                gap-3
+                text-sm
+                text-gray-500
+                dark:text-gray-400
+              "
+            >
               {featured.author?.name && (
                 <>
-                  <span className="font-semibold">
+                  <span
+                    className="
+                      font-semibold
+                      text-gray-700
+                      dark:text-gray-200
+                    "
+                  >
                     {featured.author.name}
                   </span>
 
@@ -179,19 +268,27 @@ export default function CategorySection({
               <span>
                 {new Date(
                   featured.publishedAt
-                ).toLocaleDateString("en-US", {
-                  day: "numeric",
-                  month: "short",
-                  year: "numeric",
-                })}
+                ).toLocaleDateString(
+                  "en-US",
+                  {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                  }
+                )}
               </span>
             </div>
+
           </Link>
 
-          {/* Supporting Stories */}
+          {/* =================================
+              SUPPORTING STORIES
+              ================================= */}
 
           <div className="space-y-5">
+
             {others.map((article) => (
+
               <Link
                 key={article._id}
                 href={`/article/${article.slug}`}
@@ -203,11 +300,25 @@ export default function CategorySection({
                   border-b
                   border-gray-200
                   pb-5
+                  transition
                   last:border-b-0
+
+                  dark:border-gray-700
                 "
               >
+
+                {/* Image */}
+
                 {article.featuredImage?.image && (
-                  <div className="h-24 w-32 flex-shrink-0 overflow-hidden rounded-xl">
+                  <div
+                    className="
+                      h-24
+                      w-32
+                      flex-shrink-0
+                      overflow-hidden
+                      rounded-xl
+                    "
+                  >
                     <img
                       src={urlFor(
                         article.featuredImage.image
@@ -230,22 +341,43 @@ export default function CategorySection({
                   </div>
                 )}
 
+                {/* Content */}
+
                 <div className="min-w-0 flex-1">
+
                   <h3
                     className="
                       font-bold
                       leading-6
+                      text-gray-900
                       transition
                       group-hover:text-[#C8102E]
+
+                      dark:text-white
                     "
                   >
                     {article.title}
                   </h3>
 
-                  <div className="mt-2 text-xs text-gray-500">
+                  {/* Meta */}
+
+                  <div
+                    className="
+                      mt-2
+                      text-xs
+                      text-gray-500
+                      dark:text-gray-400
+                    "
+                  >
                     {article.author?.name && (
                       <>
-                        <span className="font-semibold">
+                        <span
+                          className="
+                            font-semibold
+                            text-gray-700
+                            dark:text-gray-300
+                          "
+                        >
                           {article.author.name}
                         </span>
 
@@ -258,15 +390,22 @@ export default function CategorySection({
                     <span>
                       {new Date(
                         article.publishedAt
-                      ).toLocaleDateString("en-US", {
-                        day: "numeric",
-                        month: "short",
-                      })}
+                      ).toLocaleDateString(
+                        "en-US",
+                        {
+                          day: "numeric",
+                          month: "short",
+                        }
+                      )}
                     </span>
                   </div>
+
                 </div>
+
               </Link>
+
             ))}
+
           </div>
 
         </div>
