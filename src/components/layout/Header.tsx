@@ -6,33 +6,77 @@ import SearchBox from "../ui/SearchBox";
 
 export default function Header() {
   return (
-    <header className="relative z-50 overflow-x-clip bg-white">
+    <header
+      className="
+        relative
+        z-50
+        bg-white
+        text-gray-900
+        transition-colors
+        duration-300
+        dark:bg-[#111827]
+        dark:text-white
+      "
+    >
       <Container>
-        <div className="flex flex-wrap items-center justify-between gap-4 py-4 md:py-5 lg:flex-nowrap lg:py-6">
+        <div
+          className="
+            flex
+            items-center
+            justify-between
+            gap-8
+            py-5
+            lg:py-6
+          "
+        >
+          {/* Brand */}
 
-          {/* Logo */}
-
-          <div className="min-w-0 max-w-full flex-1 lg:flex-none">
-            <Logo />
+          <div className="min-w-0 flex-shrink-0">
+            <Logo size="lg" />
           </div>
 
-          {/* Right Side */}
+          {/* Search + Subscribe */}
 
-          <div className="flex w-full min-w-0 items-center justify-end gap-3 lg:w-auto lg:flex-shrink-0 lg:gap-5">
+          <div
+            className="
+              hidden
+              items-center
+              gap-5
+              md:flex
+              lg:flex-1
+              lg:justify-end
+            "
+          >
+            {/* Search */}
 
-            <div className="relative z-50 min-w-0 flex-1 lg:flex-none">
+            <div className="w-full max-w-[420px]">
               <SearchBox />
             </div>
 
+            {/* Subscribe */}
+
             <Link
               href="/subscribe"
-              className="hidden flex-shrink-0 rounded-full bg-[#C8102E] px-5 py-3 text-sm font-semibold text-white transition duration-300 hover:bg-[#a90d27] md:inline-flex lg:px-6"
+              className="
+                inline-flex
+                flex-shrink-0
+                items-center
+                justify-center
+                rounded-full
+                bg-[#C8102E]
+                px-6
+                py-3
+                text-sm
+                font-bold
+                text-white
+                transition
+                duration-300
+                hover:bg-[#A90D27]
+              "
             >
               Subscribe
             </Link>
-
           </div>
-
         </div>
       </Container>
     </header>

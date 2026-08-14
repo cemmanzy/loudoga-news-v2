@@ -60,7 +60,7 @@ export default function SearchBox() {
   }, [query]);
 
   return (
-    <div className="relative z-[100] min-w-0 w-full lg:w-[420px]">
+    <div className="relative z-[100] w-full">
       {/* Search Input */}
 
       <div className="flex min-w-0 items-center rounded-full border border-gray-300 bg-white px-4 py-3">

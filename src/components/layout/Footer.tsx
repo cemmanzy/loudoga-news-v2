@@ -1,7 +1,34 @@
 import Link from "next/link";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTelegram,
+  FaTiktok,
+  FaYoutube,
+  FaXTwitter,
+} from "react-icons/fa6";
 
 import { getCategories } from "@/sanity/loaders/categories";
 import { getSiteSettings } from "@/sanity/loaders/siteSettings";
+
+interface SocialIconProps {
+  platform: string;
+}
+
+function SocialIcon({ platform }: SocialIconProps) {
+  const name = platform.toLowerCase();
+
+  if (name.includes("facebook")) return <FaFacebookF />;
+  if (name.includes("instagram")) return <FaInstagram />;
+  if (name.includes("linkedin")) return <FaLinkedinIn />;
+  if (name.includes("telegram")) return <FaTelegram />;
+  if (name.includes("tiktok")) return <FaTiktok />;
+  if (name.includes("youtube")) return <FaYoutube />;
+  if (name === "x" || name.includes("twitter")) return <FaXTwitter />;
+
+  return null;
+}
 
 export default async function Footer() {
   const [categories, settings] = await Promise.all([
@@ -12,150 +39,193 @@ export default async function Footer() {
   return (
     <footer className="mt-20 bg-[#0F172A] text-white">
 
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 md:grid-cols-2 lg:grid-cols-4">
+      {/* Main Footer */}
 
-        {/* Brand */}
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
 
-        <div>
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
 
-          <h2 className="text-3xl font-black text-[#C8102E]">
+          {/* Brand */}
 
-            {settings?.siteName ?? "LOUDOGA NEWS"}
+          <div>
 
-          </h2>
+            <h2 className="text-3xl font-black tracking-tight">
+              <span className="text-[#C8102E]">
+                LOUD OGA
+              </span>{" "}
+              NEWS
+            </h2>
 
-          <p className="mt-5 leading-7 text-gray-300">
-
-            {settings?.description}
-
-          </p>
-
-          {settings?.email && (
-
-            <p className="mt-5 text-sm text-gray-400">
-
-              {settings.email}
-
+            <p className="mt-4 max-w-sm text-lg font-semibold text-white">
+              Trusted Journalism • Breaking News
             </p>
 
-          )}
-
-          {settings?.phone && (
-
-            <p className="mt-2 text-sm text-gray-400">
-
-              {settings.phone}
-
+            <p className="mt-4 max-w-md text-sm leading-7 text-gray-400">
+              {settings?.description ||
+                "Bringing you trusted news, accurate reporting and important stories that matter."}
             </p>
 
-          )}
+            {/* Subscribe CTA */}
 
-        </div>
+            <div className="mt-7">
 
-        {/* Categories */}
+              <Link
+                href="/subscribe"
+                className="inline-flex items-center rounded-full bg-[#C8102E] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#a90d27]"
+              >
+                Subscribe to Loud oga News
+              </Link>
 
-        <div>
+            </div>
 
-          <h3 className="mb-5 text-lg font-bold">
+          </div>
 
-            Categories
+          {/* Categories */}
 
-          </h3>
+          <div>
 
-          <ul className="space-y-3 text-gray-300">
+            <h3 className="mb-6 text-lg font-bold">
+              Categories
+            </h3>
 
-            {categories.map((category) => (
+            <ul className="grid grid-cols-2 gap-x-5 gap-y-3 text-sm text-gray-400">
 
-              <li key={category._id}>
+              {categories.map((category) => (
+                <li key={category._id}>
 
-                <Link
-                  href={`/category/${category.slug}`}
-                  className="hover:text-white"
-                >
+                  <Link
+                    href={`/category/${category.slug}`}
+                    className="transition hover:text-[#C8102E]"
+                  >
+                    {category.title}
+                  </Link>
 
-                  {category.title}
+                </li>
+              ))}
 
-                </Link>
+            </ul>
 
-              </li>
+          </div>
 
-            ))}
+          {/* Contact */}
 
-          </ul>
+          <div>
 
-        </div>
+            <h3 className="mb-6 text-lg font-bold">
+              Contact
+            </h3>
 
-        {/* Address */}
+            <div className="space-y-4 text-sm text-gray-400">
 
-        <div>
+              {settings?.email && (
+                <div>
+                  <p className="mb-1 text-xs font-bold uppercase tracking-wider text-gray-500">
+                    Email
+                  </p>
 
-          <h3 className="mb-5 text-lg font-bold">
+                  <a
+                    href={`mailto:${settings.email}`}
+                    className="transition hover:text-white"
+                  >
+                    {settings.email}
+                  </a>
+                </div>
+              )}
 
-            Contact
+              {settings?.phone && (
+                <div>
+                  <p className="mb-1 text-xs font-bold uppercase tracking-wider text-gray-500">
+                    Phone
+                  </p>
 
-          </h3>
+                  <a
+                    href={`tel:${settings.phone}`}
+                    className="transition hover:text-white"
+                  >
+                    {settings.phone}
+                  </a>
+                </div>
+              )}
 
-          <p className="whitespace-pre-line text-gray-300">
+              {settings?.address && (
+                <div>
+                  <p className="mb-1 text-xs font-bold uppercase tracking-wider text-gray-500">
+                    Address
+                  </p>
 
-            {settings?.address}
+                  <p className="whitespace-pre-line leading-6">
+                    {settings.address}
+                  </p>
+                </div>
+              )}
 
-          </p>
+            </div>
 
-        </div>
+          </div>
 
-        {/* Social */}
+          {/* Follow Us */}
 
-        <div>
+          <div>
 
-          <h3 className="mb-5 text-lg font-bold">
+            <h3 className="mb-6 text-lg font-bold">
+              Follow Us
+            </h3>
 
-            Follow Us
+            <p className="mb-5 text-sm leading-6 text-gray-400">
+              Follow Loud oga News for breaking stories, updates and
+              exclusive reports.
+            </p>
 
-          </h3>
+            <div className="flex flex-wrap gap-3">
 
-          <ul className="space-y-3">
+              {settings?.socialLinks?.map((social) => {
+                const icon = (
+                  <SocialIcon platform={social.platform} />
+                );
 
-            {settings?.socialLinks?.map((social) => (
+                return (
+                  <a
+                    key={social.platform}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.platform}
+                    title={social.platform}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-700 bg-[#111827] text-gray-300 transition hover:border-[#C8102E] hover:bg-[#C8102E] hover:text-white"
+                  >
+                    {icon || (
+                      <span className="text-xs font-bold uppercase">
+                        {social.platform.slice(0, 2)}
+                      </span>
+                    )}
+                  </a>
+                );
+              })}
 
-              <li key={social.platform}>
+            </div>
 
-                <a
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="capitalize text-gray-300 hover:text-white"
-                >
-
-                  {social.platform}
-
-                </a>
-
-              </li>
-
-            ))}
-
-          </ul>
+          </div>
 
         </div>
 
       </div>
 
+      {/* Bottom Bar */}
+
       <div className="border-t border-gray-800">
 
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 text-sm text-gray-400">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-6 text-sm text-gray-500 md:flex-row md:items-center md:justify-between">
 
           <p>
-
-            {settings?.copyright ??
-              `© ${new Date().getFullYear()} Loudoga News`}
-
+            {settings?.copyright ||
+              `© ${new Date().getFullYear()} Loud oga News. All rights reserved.`}
           </p>
 
-          <p>
-
-            {settings?.tagline}
-
-          </p>
+          {settings?.tagline && (
+            <p className="font-medium text-gray-400">
+              {settings.tagline}
+            </p>
+          )}
 
         </div>
 

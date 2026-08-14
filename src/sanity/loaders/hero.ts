@@ -3,7 +3,7 @@ import { heroQuery } from "../queries/hero";
 
 import type { Article } from "@/types/article";
 
-export async function getHero(): Promise<Article | null> {
+export async function getHero(): Promise<Article[]> {
   return sanityFetch({
     query: heroQuery,
     tags: ["article"],

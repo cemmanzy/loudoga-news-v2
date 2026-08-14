@@ -1,19 +1,19 @@
 import type { Article } from "@/types/article";
 
-import HeroArticleCard from "../cards/HeroArticleCard";
+import HeroCarousel from "./HeroCarousel";
 
 interface Props {
-  article: Article;
+  articles: Article[];
 }
 
 export default function Hero({
-  article,
+  articles,
 }: Props) {
+  if (!articles.length) return null;
+
   return (
     <section className="mb-16">
-
-      <HeroArticleCard article={article} />
-
+      <HeroCarousel articles={articles} />
     </section>
   );
 }

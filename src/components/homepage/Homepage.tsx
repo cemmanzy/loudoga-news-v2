@@ -15,7 +15,7 @@ import type { BreakingArticle } from "@/sanity/loaders/breaking";
 
 
 interface Props {
-  hero: Article | null;
+  hero: Article[];
 
   breaking: BreakingArticle[];
 
@@ -55,7 +55,7 @@ export default function Homepage({
 }: Props) {
   return (
     <>
-      {hero && <Hero article={hero} />}
+      {hero.length > 0 && <Hero articles={hero} />}
 
     {breaking.length > 0 && (
       <BreakingNews articles={breaking} />

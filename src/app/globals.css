@@ -1,23 +1,77 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* =========================================
+   LOUDOGA GLOBAL THEME
+   ========================================= */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-html {
+/* =========================================
+   DARK MODE
+   ========================================= */
+
+html.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+
+  color-scheme: dark;
+}
+
+/* =========================================
+   LIGHT MODE
+   ========================================= */
+
+html:not(.dark) {
   color-scheme: light;
 }
+
+/* =========================================
+   BODY
+   ========================================= */
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }
+
+/* =========================================
+   DARK MODE SELECTION
+   ========================================= */
+
+::selection {
+  background: #c8102e;
+  color: #ffffff;
+}
+
+/* =========================================
+   GLOBAL HORIZONTAL OVERFLOW
+   ========================================= */
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* =========================================
+   LOUDOGA MARQUEE
+   ========================================= */
 
 @keyframes marquee {
   0% {
@@ -39,6 +93,10 @@ body {
   animation-play-state: paused;
 }
 
+/* =========================================
+   SCROLLBAR HIDDEN UTILITY
+   ========================================= */
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
@@ -48,8 +106,204 @@ body {
   scrollbar-width: none;
 }
 
+/* =========================================
+   LOUDOGA BREAKING NEWS TICKER
+   ========================================= */
+
+@keyframes breaking-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.breaking-marquee {
+  animation: breaking-marquee 40s linear infinite;
+}
+
+.breaking-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* =========================================
+   HERO FADE ANIMATION
+   ========================================= */
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-hero-fade {
+  animation: hero-fade 0.6s ease-in-out;
+}
+
+/* =========================================
+   DARK MODE — COMMON ELEMENTS
+   ========================================= */
+
+/* Cards */
+
+.dark .bg-white {
+  background-color: #111827;
+}
+
+/* Main light gray backgrounds */
+
+.dark .bg-gray-50 {
+  background-color: #0f172a;
+}
+
+/* Borders */
+
+.dark .border-gray-200 {
+  border-color: #374151;
+}
+
+.dark .border-gray-300 {
+  border-color: #4b5563;
+}
+
+/* Text */
+
+.dark .text-gray-900 {
+  color: #f8fafc;
+}
+
+.dark .text-gray-800 {
+  color: #e5e7eb;
+}
+
+.dark .text-gray-700 {
+  color: #d1d5db;
+}
+
+.dark .text-gray-600 {
+  color: #d1d5db;
+}
+
+.dark .text-gray-500 {
+  color: #9ca3af;
+}
+
+.dark .text-gray-400 {
+  color: #9ca3af;
+}
+
+/* =========================================
+   DARK MODE — HOVER STATES
+   ========================================= */
+
+.dark .hover\:bg-gray-50:hover {
+  background-color: #1f2937;
+}
+
+.dark .hover\:bg-gray-100:hover {
+  background-color: #1f2937;
+}
+
+/* =========================================
+   DARK MODE — ARTICLE CONTENT
+   ========================================= */
+
+.dark .prose {
+  color: #e5e7eb;
+}
+
+.dark .prose p {
+  color: #e5e7eb;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+  color: #f8fafc;
+}
+
+.dark .prose strong {
+  color: #ffffff;
+}
+
+.dark .prose a {
+  color: #f43f5e;
+}
+
+.dark .prose blockquote {
+  color: #d1d5db;
+  border-color: #c8102e;
+  background-color: #111827;
+}
+
+/* =========================================
+   DARK MODE — LINKS
+   ========================================= */
+
+.dark a {
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* =========================================
+   DARK MODE — FORM ELEMENTS
+   ========================================= */
+
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #111827;
+  color: #f8fafc;
+  border-color: #374151;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #9ca3af;
+}
+
+/* =========================================
+   DARK MODE — HR
+   ========================================= */
+
+.dark hr {
+  border-color: #374151;
+}
+
+/* =========================================
+   DARK MODE — FIGCAPTION
+   ========================================= */
+
+.dark figcaption {
+  color: #9ca3af;
+}
+
+/* =========================================
+   DARK MODE — SCROLLBAR
+   ========================================= */
+
+.dark {
+  scrollbar-color: #475569 #0f172a;
+}
+
+/* =========================================
+   SMOOTH THEME TRANSITION
+   ========================================= */
+
 html,
 body {
-  max-width: 100%;
-  overflow-x: hidden;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
 }

@@ -5,7 +5,7 @@ export const heroQuery = groq`
     _type == "article" &&
     heroStory == true
   ]
-  | order(publishedAt desc)[0]{
+  | order(publishedAt desc)[0...10]{
     _id,
     title,
     "slug": slug.current,

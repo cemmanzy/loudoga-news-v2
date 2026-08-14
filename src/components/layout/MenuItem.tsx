@@ -34,7 +34,17 @@ export default function MenuItem({
 
       <Link
         href={`/category/${slug}`}
-        className="rounded-md px-2 py-1 transition duration-200 hover:bg-gray-100 hover:text-[#C8102E]"
+        className="
+          rounded-md
+          px-2
+          py-1
+          transition
+          duration-200
+          hover:bg-gray-100
+          hover:text-[#C8102E]
+          dark:hover:bg-gray-800
+          dark:hover:text-[#C8102E]
+        "
       >
         {title}
       </Link>

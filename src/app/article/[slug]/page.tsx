@@ -128,53 +128,84 @@ export default async function ArticlePage({
 
   return (
     <>
-  {/* Article JSON-LD Structured Data */}
+      {/* View Tracking */}
 
-  <ArticleViewTracker slug={article.slug} />
+      <ArticleViewTracker
+        slug={article.slug}
+      />
 
-  <ArticleStructuredData
-    title={article.title}
-    description={article.excerpt}
-    url={`${siteConfig.url}/article/${article.slug}`}
-    image={
-      article.imageUrl ||
-      (article.featuredImage?.image
-        ? urlFor(article.featuredImage.image)
-            .width(1200)
-            .height(630)
-            .url()
-        : undefined)
-    }
-    datePublished={article.publishedAt}
-    dateModified={article.publishedAt}
-    authorName={article.author?.name}
-  />
+      {/* Article Structured Data */}
 
-  {/* Breadcrumb JSON-LD Structured Data */}
+      <ArticleStructuredData
+        title={article.title}
+        description={article.excerpt}
+        url={`${siteConfig.url}/article/${article.slug}`}
+        image={
+          article.imageUrl ||
+          (article.featuredImage?.image
+            ? urlFor(article.featuredImage.image)
+                .width(1200)
+                .height(630)
+                .url()
+            : undefined)
+        }
+        datePublished={article.publishedAt}
+        dateModified={article.publishedAt}
+        authorName={article.author?.name}
+      />
 
-  <BreadcrumbStructuredData
-    categoryTitle={article.categories?.[0]?.title}
-    categorySlug={article.categories?.[0]?.slug}
-    articleTitle={article.title}
-    articleUrl={`${siteConfig.url}/article/${article.slug}`}
-    siteUrl={siteConfig.url}
-  />
+      {/* Breadcrumb Structured Data */}
 
-  <main className="mx-auto max-w-7xl px-6 py-12">
-        <div className="grid gap-12 lg:grid-cols-[2fr_360px]">
+      <BreadcrumbStructuredData
+        categoryTitle={
+          article.categories?.[0]?.title
+        }
+        categorySlug={
+          article.categories?.[0]?.slug
+        }
+        articleTitle={article.title}
+        articleUrl={`${siteConfig.url}/article/${article.slug}`}
+        siteUrl={siteConfig.url}
+      />
 
-          {/* LEFT COLUMN */}
+      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
 
-          <div>
-            <Breadcrumbs
-              category={article.categories?.[0]}
-              title={article.title}
-            />
+        <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_340px] xl:gap-16">
+
+          {/* ================================= */}
+          {/* MAIN ARTICLE */}
+          {/* ================================= */}
+
+          <article className="min-w-0">
+
+            {/* Breadcrumbs */}
+
+            <div className="mb-6">
+              <Breadcrumbs
+                category={article.categories?.[0]}
+                title={article.title}
+              />
+            </div>
+
+            {/* Category */}
 
             {article.categories?.[0] && (
               <Link
                 href={`/category/${article.categories[0].slug}`}
-                className="inline-block rounded-full bg-[#C8102E] px-4 py-2 text-sm font-bold text-white"
+                className="
+                  inline-flex
+                  rounded-full
+                  bg-[#C8102E]
+                  px-4
+                  py-1.5
+                  text-xs
+                  font-bold
+                  uppercase
+                  tracking-wide
+                  text-white
+                  transition
+                  hover:bg-[#a90d27]
+                "
               >
                 {article.categories[0].title}
               </Link>
@@ -182,16 +213,68 @@ export default async function ArticlePage({
 
             {/* Title */}
 
-            <h1 className="mt-6 text-4xl font-extrabold leading-tight lg:text-5xl">
+            <h1
+              className="
+                mt-5
+                max-w-5xl
+                text-4xl
+                font-black
+                leading-[1.08]
+                tracking-tight
+                text-[#111827]
+
+                sm:text-5xl
+
+                lg:text-6xl
+              "
+            >
               {article.title}
             </h1>
 
+            {/* Excerpt under title */}
+
+            {article.excerpt && (
+              <p
+                className="
+                  mt-6
+                  max-w-4xl
+                  text-lg
+                  leading-8
+                  text-gray-600
+
+                  lg:text-xl
+                  lg:leading-9
+                "
+              >
+                {article.excerpt}
+              </p>
+            )}
+
             {/* Author / Date / Reading Time */}
 
-            <div className="mt-8 flex flex-wrap items-center gap-3 text-sm text-gray-500">
+            <div
+              className="
+                mt-7
+                flex
+                flex-wrap
+                items-center
+                gap-x-3
+                gap-y-2
+                border-b
+                border-gray-200
+                pb-6
+                text-sm
+                text-gray-500
+              "
+            >
               <Link
                 href={`/author/${article.author.slug}`}
-                className="font-semibold text-gray-800 transition hover:text-[#C8102E]"
+                className="
+                  font-bold
+                  text-gray-900
+                  transition
+                  hover:text-[#C8102E]
+                "
               >
                 By {article.author.name}
               </Link>
@@ -199,14 +282,13 @@ export default async function ArticlePage({
               <span>•</span>
 
               <span>
-                {new Date(article.publishedAt).toLocaleDateString(
-                  "en-US",
-                  {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  }
-                )}
+                {new Date(
+                  article.publishedAt
+                ).toLocaleDateString("en-US", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
               </span>
 
               <span>•</span>
@@ -216,73 +298,149 @@ export default async function ArticlePage({
               </span>
             </div>
 
-            {/* Share Buttons */}
+            {/* Share */}
 
-            <ShareButtons
-              title={article.title}
-            />
+            <div className="py-5">
+              <ShareButtons
+                title={article.title}
+              />
+            </div>
 
-            {/* Featured Image */}
+            {/* ================================= */}
+            {/* FEATURED IMAGE */}
+            {/* ================================= */}
 
             {article.featuredImage?.image && (
-              <figure className="mt-8">
-                <img
-                  src={urlFor(article.featuredImage.image)
-                    .width(1600)
-                    .url()}
-                  alt={
-                    article.featuredImage.alt ||
-                    article.title
-                  }
-                  className="w-full rounded-2xl object-cover"
-                />
+              <figure className="mt-2">
+
+                <div className="overflow-hidden rounded-2xl lg:rounded-3xl">
+                  <img
+                    src={urlFor(
+                      article.featuredImage.image
+                    )
+                      .width(1800)
+                      .url()}
+                    alt={
+                      article.featuredImage.alt ||
+                      article.title
+                    }
+                    className="
+                      h-auto
+                      w-full
+                      object-cover
+                    "
+                  />
+                </div>
 
                 {(article.featuredImage.caption ||
                   article.featuredImage.photoCredit) && (
-                  <figcaption className="mt-3 flex flex-wrap justify-between gap-2 text-sm text-gray-500">
-                    <span>
-                      {article.featuredImage.caption}
-                    </span>
+                  <figcaption
+                    className="
+                      mt-3
+                      flex
+                      flex-wrap
+                      justify-between
+                      gap-2
+                      text-xs
+                      leading-5
+                      text-gray-500
+                    "
+                  >
+                    {article.featuredImage.caption && (
+                      <span>
+                        {article.featuredImage.caption}
+                      </span>
+                    )}
 
-                    <span>
-                      Photo: {article.featuredImage.photoCredit}
-                    </span>
+                    {article.featuredImage.photoCredit && (
+                      <span>
+                        Photo:{" "}
+                        {article.featuredImage.photoCredit}
+                      </span>
+                    )}
                   </figcaption>
                 )}
+
               </figure>
             )}
 
-            {/* Excerpt */}
+            {/* ================================= */}
+            {/* ARTICLE BODY */}
+            {/* ================================= */}
 
-            <p className="mt-8 text-xl leading-8 text-gray-600">
-              {article.excerpt}
-            </p>
+            <div className="mt-10">
 
-            {/* Article Body */}
+              <article
+                className="
+                  prose
+                  prose-lg
+                  max-w-none
 
-            <article className="prose prose-lg mt-10 max-w-none prose-headings:font-bold prose-img:rounded-xl">
-              <PortableText
-                value={article.body ?? []}
-                components={portableTextComponents}
-              />
-            </article>
+                  prose-headings:font-black
+                  prose-headings:tracking-tight
+                  prose-headings:text-[#111827]
 
-            {/* Related Articles */}
+                  prose-p:leading-8
+                  prose-p:text-gray-700
 
-            <RelatedArticles
-              articles={related}
-            />
-          </div>
+                  prose-a:text-[#C8102E]
+                  prose-a:no-underline
+                  hover:prose-a:underline
 
-          {/* RIGHT SIDEBAR */}
+                  prose-strong:text-[#111827]
+
+                  prose-blockquote:border-l-[#C8102E]
+                  prose-blockquote:text-gray-700
+
+                  prose-img:rounded-2xl
+                "
+              >
+                <PortableText
+                  value={article.body ?? []}
+                  components={
+                    portableTextComponents
+                  }
+                />
+              </article>
+
+            </div>
+
+            {/* ================================= */}
+            {/* RELATED ARTICLES */}
+            {/* ================================= */}
+
+            {related.length > 0 && (
+              <section
+                className="
+                  mt-16
+                  border-t
+                  border-gray-200
+                  pt-12
+                "
+              >
+                <RelatedArticles
+                  articles={related}
+                />
+              </section>
+            )}
+
+          </article>
+
+          {/* ================================= */}
+          {/* SIDEBAR */}
+          {/* ================================= */}
 
           <aside className="hidden lg:block">
-            <div className="sticky top-24">
+
+            <div className="sticky top-24 space-y-8">
+
               <ArticleSidebar
                 mostRead={mostRead}
                 latest={latest}
               />
+
             </div>
+
           </aside>
 
         </div>
