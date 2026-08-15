@@ -7,12 +7,12 @@ import EditorsPick from "./EditorsPick";
 import ExclusiveNews from "./ExclusiveNews";
 import MostRead from "./MostRead";
 import CategorySection from "./CategorySection";
+import LiveTVPopup from "./LiveTVPopup";
 
 import Container from "../ui/Container";
 
 import type { Article } from "@/types/article";
 import type { BreakingArticle } from "@/sanity/loaders/breaking";
-
 
 interface Props {
   hero: Article[];
@@ -40,6 +40,16 @@ interface Props {
     slug: string;
     articles: Article[];
   }[];
+
+  /* =========================================
+     LIVE TV
+  ========================================== */
+
+  liveEnabled?: boolean;
+
+  liveTitle?: string;
+
+  liveYoutubeUrl?: string;
 }
 
 export default function Homepage({
@@ -52,57 +62,155 @@ export default function Homepage({
   exclusive,
   mostRead,
   sections,
+  liveEnabled,
+  liveTitle,
+  liveYoutubeUrl,
 }: Props) {
   return (
     <>
-      {hero.length > 0 && <Hero articles={hero} />}
+      {/* =========================================
+          HERO + LIVE TV
+      ========================================== */}
 
-    {breaking.length > 0 && (
-      <BreakingNews articles={breaking} />
-    )}
+      {hero.length > 0 && (
+  <section
+    id="hero-section"
+    className="mb-16"
+  >
+    <Container>
+            <div
+              className="
+                grid
+                min-w-0
+                grid-cols-1
+                items-start
+                gap-6
 
-    <Container className="my-16">
-      <div className="grid min-w-0 grid-cols-1 gap-10 lg:grid-cols-[2fr_1fr]">
-        <LatestNews articles={latest} />
+                lg:grid-cols-[0.9fr_1.4fr]
+                lg:gap-6
+              "
+            >
+              {/* =====================================
+                  LIVE TV — LEFT
+              ====================================== */}
 
-        <MostRead articles={mostRead} />
-      </div>
+              {liveEnabled && liveYoutubeUrl ? (
+  <div
+    className="
+      min-w-0
 
-      <section className="mt-16">
-        <TrendingNews articles={trending} />
-      </section>
+      lg:sticky
+      lg:top-6
+      lg:self-start
+    "
+  >
+    <LiveTVPopup
+      youtubeUrl={liveYoutubeUrl}
+      title={
+        liveTitle ??
+        "Loud Oga News Live"
+      }
+    />
+  </div>
+) : (
+  <div className="hidden lg:block" />
+)}
 
-      <section className="mt-20 border-t border-gray-200 pt-16">
-  <EditorsPick articles={editorsPick} />
-</section>
+              {/* =====================================
+                  HERO STORY — RIGHT
+              ====================================== */}
 
-<section className="mt-20 border-t border-gray-200 pt-16">
-  <ExclusiveNews articles={exclusive} />
-</section>
+              <div className="min-w-0">
+  <Hero articles={hero} />
+</div>
+            </div>
+          </Container>
+        </section>
+      )}
 
-      <section className="mt-20 border-t border-gray-200 pt-16">
-        <FeaturedNews articles={featured} />
-      </section>
+      {/* =========================================
+          BREAKING NEWS
+      ========================================== */}
 
-      <div className="mt-16">
-        {sections.map((section, index) => (
-          <div
-            key={section.slug}
-            className={
-              index === 0
-                ? ""
-                : "mt-20 border-t border-gray-200 pt-16"
-            }
-          >
-            <CategorySection
-              title={section.title}
-              href={`/category/${section.slug}`}
-              articles={section.articles}
-            />
-          </div>
-        ))}
-      </div>
-    </Container>
+      {breaking.length > 0 && (
+        <BreakingNews articles={breaking} />
+      )}
+
+      {/* =========================================
+          MAIN CONTENT
+      ========================================== */}
+
+      <Container className="my-16">
+        <div
+          className="
+            grid
+            min-w-0
+            grid-cols-1
+            gap-10
+
+            lg:grid-cols-[2fr_1fr]
+          "
+        >
+          <LatestNews articles={latest} />
+
+          <MostRead articles={mostRead} />
+        </div>
+
+        {/* =========================================
+            TRENDING
+        ========================================== */}
+
+        <section className="mt-16">
+          <TrendingNews articles={trending} />
+        </section>
+
+        {/* =========================================
+            EDITOR'S PICK
+        ========================================== */}
+
+        <section className="mt-20 border-t border-gray-200 pt-16">
+          <EditorsPick articles={editorsPick} />
+        </section>
+
+        {/* =========================================
+            EXCLUSIVE
+        ========================================== */}
+
+        <section className="mt-20 border-t border-gray-200 pt-16">
+          <ExclusiveNews articles={exclusive} />
+        </section>
+
+        {/* =========================================
+            FEATURED
+        ========================================== */}
+
+        <section className="mt-20 border-t border-gray-200 pt-16">
+          <FeaturedNews articles={featured} />
+        </section>
+
+        {/* =========================================
+            CATEGORY SECTIONS
+        ========================================== */}
+
+        <div className="mt-16">
+          {sections.map((section, index) => (
+            <div
+              key={section.slug}
+              className={
+                index === 0
+                  ? ""
+                  : "mt-20 border-t border-gray-200 pt-16"
+              }
+            >
+              <CategorySection
+                title={section.title}
+                href={`/category/${section.slug}`}
+                articles={section.articles}
+              />
+            </div>
+          ))}
+        </div>
+      </Container>
     </>
   );
 }

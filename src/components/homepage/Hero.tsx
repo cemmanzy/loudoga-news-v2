@@ -12,7 +12,10 @@ export default function Hero({
   if (!articles.length) return null;
 
   return (
-    <section className="mb-16">
+    <section
+      id="hero-section"
+      className="mb-16"
+    >
       <HeroCarousel articles={articles} />
     </section>
   );

@@ -1,38 +1,42 @@
 import { groq } from "next-sanity";
 
 export const siteSettingsQuery = groq`
-*[_type=="siteSettings"][0]{
+  *[_type=="siteSettings"][0]{
 
-  siteName,
+    siteName,
 
-  tagline,
+    tagline,
 
-  description,
+    description,
 
-  aboutTitle,
-  aboutContent,
+    aboutTitle,
+    aboutContent,
 
-  contactTitle,
-  contactContent,
+    contactTitle,
+    contactContent,
 
-  privacyTitle,
-  privacyContent,
+    privacyTitle,
+    privacyContent,
 
-  advertiseTitle,
-  advertiseContent,
+    advertiseTitle,
+    advertiseContent,
 
-  copyright,
+    copyright,
 
-  email,
+    email,
 
-  phone,
+    phone,
 
-  address,
+    address,
 
-  socialLinks[]{
-    platform,
-    url
+    socialLinks[]{
+      platform,
+      url
+    },
+
+    liveEnabled,
+    liveTitle,
+    liveYoutubeUrl
+
   }
-
-}
 `;

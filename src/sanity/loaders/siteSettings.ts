@@ -32,6 +32,16 @@ export interface SiteSettings {
     platform: string;
     url: string;
   }[];
+
+  /* =========================================
+     LIVE TV
+  ========================================== */
+
+  liveEnabled?: boolean;
+
+  liveTitle?: string;
+
+  liveYoutubeUrl?: string;
 }
 
 export async function getSiteSettings(): Promise<SiteSettings | null> {

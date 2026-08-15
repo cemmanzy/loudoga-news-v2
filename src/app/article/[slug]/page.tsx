@@ -8,6 +8,8 @@ import { getArticle } from "@/sanity/loaders/article";
 import { getRelated } from "@/sanity/loaders/related";
 import { getArticleMostRead } from "@/sanity/loaders/articleMostRead";
 import { getSidebarLatest } from "@/sanity/loaders/sidebarLatest";
+import { getBreaking } from "@/sanity/loaders/breaking";
+import BreakingNews from "@/components/homepage/BreakingNews";
 
 import { urlFor } from "@/sanity/lib/image";
 import { calculateReadingTime } from "@/sanity/lib/readingTime";
@@ -126,6 +128,9 @@ export default async function ArticlePage({
   const latest =
     await getSidebarLatest();
 
+    const breaking =
+  await getBreaking();
+
   return (
     <>
       {/* View Tracking */}
@@ -167,6 +172,10 @@ export default async function ArticlePage({
         articleUrl={`${siteConfig.url}/article/${article.slug}`}
         siteUrl={siteConfig.url}
       />
+       
+        {breaking.length > 0 && (
+  <BreakingNews articles={breaking} />
+)}
 
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
 

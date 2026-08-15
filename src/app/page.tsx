@@ -4,6 +4,7 @@ import Homepage from "@/components/homepage/Homepage";
 
 import { siteConfig } from "@/config/site";
 import { getHomepage } from "@/sanity/loaders/homepage";
+import { getSiteSettings } from "@/sanity/loaders/siteSettings";
 
 /* ------------------------------------ */
 /* Homepage SEO */
@@ -47,7 +48,17 @@ export const metadata: Metadata = {
 /* ------------------------------------ */
 
 export default async function Home() {
-  const homepage = await getHomepage();
+  const [homepage, settings] = await Promise.all([
+    getHomepage(),
+    getSiteSettings(),
+  ]);
 
-  return <Homepage {...homepage} />;
+  return (
+    <Homepage
+      {...homepage}
+      liveEnabled={settings?.liveEnabled}
+      liveTitle={settings?.liveTitle}
+      liveYoutubeUrl={settings?.liveYoutubeUrl}
+    />
+  );
 }
