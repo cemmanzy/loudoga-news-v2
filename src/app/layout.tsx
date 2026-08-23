@@ -9,7 +9,9 @@ import TopBar from "@/components/layout/TopBar";
 import Header from "@/components/layout/Header";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import GoogleAdSense from "@/components/ads/GoogleAdSense";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -62,13 +64,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-
     title: siteConfig.name,
-
     description: siteConfig.description,
-
     creator: siteConfig.twitter,
-
     images: [siteConfig.ogImage],
   },
 
@@ -124,6 +122,10 @@ export default function RootLayout({
             measurementId={measurementId}
           />
         )}
+
+        {/* Google AdSense */}
+
+        <GoogleAdSense />
       </body>
     </html>
   );
