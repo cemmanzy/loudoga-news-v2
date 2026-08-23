@@ -15,14 +15,14 @@ import { getSiteSettings } from "@/sanity/loaders/siteSettings";
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSiteSettings();
 
-  const privacyTitle =
-    settings?.privacyTitle ?? "Privacy Policy";
+  const termsTitle =
+    settings?.termsTitle ?? "Terms & Conditions";
 
   const title =
-    `${privacyTitle} | ${siteConfig.name}`;
+    `${termsTitle} | ${siteConfig.name}`;
 
   const description =
-    `Read the ${privacyTitle.toLowerCase()} of ${siteConfig.name} to understand how we handle information and protect your privacy.`;
+    `Read the ${termsTitle.toLowerCase()} for ${siteConfig.name}, including information about website use, content, and user responsibilities.`;
 
   return {
     title,
@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description,
 
     alternates: {
-      canonical: `${siteConfig.url}/privacy-policy`,
+      canonical: `${siteConfig.url}/terms`,
     },
 
     openGraph: {
@@ -38,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
       description,
 
-      url: `${siteConfig.url}/privacy-policy`,
+      url: `${siteConfig.url}/terms`,
 
       siteName: siteConfig.name,
 
@@ -69,7 +69,7 @@ export async function generateMetadata(): Promise<Metadata> {
 /* Page */
 /* ------------------------------------ */
 
-export default async function PrivacyPolicyPage() {
+export default async function TermsPage() {
   const settings = await getSiteSettings();
 
   return (
@@ -100,7 +100,7 @@ export default async function PrivacyPolicyPage() {
                 text-[#C8102E]
               "
             >
-              Your Privacy
+              Legal
             </span>
           </div>
 
@@ -117,7 +117,8 @@ export default async function PrivacyPolicyPage() {
               lg:text-6xl
             "
           >
-            {settings?.privacyTitle ?? "Privacy Policy"}
+            {settings?.termsTitle ??
+              "Terms & Conditions"}
           </h1>
 
           <p
@@ -129,15 +130,15 @@ export default async function PrivacyPolicyPage() {
               dark:text-gray-300
             "
           >
-            This page explains how Loud Oga News &
-            TV handles information and protects the
-            privacy of visitors and users of our
-            website.
+            These terms explain the rules and
+            conditions that apply when using the
+            Loud Oga News & TV website and its
+            services.
           </p>
         </div>
 
         {/* =====================================
-            PRIVACY CONTENT
+            TERMS CONTENT
         ====================================== */}
 
         <article
@@ -158,7 +159,7 @@ export default async function PrivacyPolicyPage() {
             lg:p-10
           "
         >
-          {settings?.privacyContent?.length ? (
+          {settings?.termsContent?.length ? (
             <div
               className="
                 prose
@@ -187,14 +188,33 @@ export default async function PrivacyPolicyPage() {
               "
             >
               <PortableText
-                value={settings.privacyContent}
+                value={settings.termsContent}
               />
             </div>
           ) : (
-            <div className="text-gray-600 dark:text-gray-300">
-              <p className="text-lg leading-8">
-                Our privacy policy content will be
-                published here once it has been
+            <div>
+              <h2
+                className="
+                  text-2xl
+                  font-bold
+                  text-gray-900
+                  dark:text-white
+                "
+              >
+                Terms & Conditions
+              </h2>
+
+              <p
+                className="
+                  mt-4
+                  text-lg
+                  leading-8
+                  text-gray-600
+                  dark:text-gray-300
+                "
+              >
+                Our Terms & Conditions will be
+                published here once they have been
                 configured in Sanity.
               </p>
             </div>

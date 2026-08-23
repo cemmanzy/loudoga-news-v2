@@ -17,6 +17,9 @@ export interface SiteSettings {
   privacyTitle?: string;
   privacyContent?: any[];
 
+  termsTitle?: string;
+  termsContent?: any[];
+
   advertiseTitle?: string;
   advertiseContent?: any[];
 

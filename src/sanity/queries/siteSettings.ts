@@ -18,6 +18,9 @@ export const siteSettingsQuery = groq`
     privacyTitle,
     privacyContent,
 
+    termsTitle,
+    termsContent,
+
     advertiseTitle,
     advertiseContent,
 

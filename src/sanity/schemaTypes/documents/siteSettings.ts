@@ -143,6 +143,27 @@ export const siteSettingsType = defineType({
     }),
 
     /* =========================================
+       TERMS & CONDITIONS
+    ========================================== */
+
+    defineField({
+      name: "termsTitle",
+      title: "Terms & Conditions Title",
+      type: "string",
+    }),
+
+    defineField({
+      name: "termsContent",
+      title: "Terms & Conditions",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "block",
+        }),
+      ],
+    }),
+
+    /* =========================================
        ADVERTISE PAGE
     ========================================== */
 

@@ -9,8 +9,7 @@ import TopBar from "@/components/layout/TopBar";
 import Header from "@/components/layout/Header";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-
-
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -48,6 +47,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     url: siteConfig.url,
     siteName: siteConfig.name,
+
     images: [
       {
         url: siteConfig.ogImage,
@@ -55,15 +55,20 @@ export const metadata: Metadata = {
         height: 630,
       },
     ],
+
     locale: "en_US",
     type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
+
     title: siteConfig.name,
+
     description: siteConfig.description,
+
     creator: siteConfig.twitter,
+
     images: [siteConfig.ogImage],
   },
 
@@ -78,24 +83,48 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const measurementId =
+    process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`
+        ${geistSans.variable}
+        ${geistMono.variable}
+        h-full
+        antialiased
+      `}
     >
-      <body className="min-h-screen bg-gray-50 text-gray-900 dark:bg-[#0F172A] dark:text-white">
-  <TopBar />
+      <body
+        className="
+          min-h-screen
+          bg-gray-50
+          text-gray-900
+          dark:bg-[#0F172A]
+          dark:text-white
+        "
+      >
+        <TopBar />
 
-  <Header />
+        <Header />
 
-  <Navbar />
+        <Navbar />
 
-  <main className="flex-1">
-    {children}
-  </main>
+        <main className="flex-1">
+          {children}
+        </main>
 
-  <Footer />
-</body>
+        <Footer />
+
+        {/* Google Analytics */}
+
+        {measurementId && (
+          <GoogleAnalytics
+            measurementId={measurementId}
+          />
+        )}
+      </body>
     </html>
   );
 }
