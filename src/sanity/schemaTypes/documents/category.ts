@@ -14,6 +14,14 @@ export const categoryType = defineType({
     }),
 
     defineField({
+      name: "navOrder",
+      title: "Navigation Order",
+      type: "number",
+      description:
+        "Controls the order of this category in the website navigation.",
+    }),
+
+    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",

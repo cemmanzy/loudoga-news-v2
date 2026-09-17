@@ -75,15 +75,18 @@ export default function LiveTVPopup({
   youtubeUrl,
   title = "Loud Oga News Live",
 }: Props) {
+  const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [heroInView, setHeroInView] = useState(true);
   const [shared, setShared] = useState(false);
 
   /* =========================================
-     SHOW PLAYER AFTER 5 SECONDS
+     CLIENT MOUNT + SHOW PLAYER AFTER 5 SECONDS
   ========================================== */
 
   useEffect(() => {
+    setMounted(true);
+
     const timer = window.setTimeout(() => {
       setVisible(true);
     }, 5000);
@@ -217,7 +220,6 @@ export default function LiveTVPopup({
             gap-3
             px-4
             py-3
-
             sm:px-5
           "
         >
@@ -271,7 +273,6 @@ export default function LiveTVPopup({
                   text-sm
                   font-bold
                   text-white
-
                   sm:text-base
                 "
               >
@@ -309,44 +310,44 @@ export default function LiveTVPopup({
         {/* =========================================
             VIDEO
 
-            IMPORTANT:
-            We NEVER remove this iframe when
-            scrolling.
+            The iframe is created only after the
+            component mounts. This prevents the
+            server/client hydration mismatch.
 
-            YouTube therefore keeps the same
-            playback session.
+            Once created, it stays mounted even
+            when the player slides off-screen.
         ========================================== */}
 
         <div className="relative aspect-video w-full bg-black">
-          <iframe
-            src={
-              `https://www.youtube.com/embed/${videoId}` +
-              `?autoplay=1` +
-              `&mute=1` +
-              `&rel=0` +
-              `&playsinline=1` +
-              `&enablejsapi=1` +
-              `&origin=${
-                typeof window !== "undefined"
-                  ? window.location.origin
-                  : ""
-              }`
-            }
-            title={title}
-            className="
-              absolute
-              inset-0
-              h-full
-              w-full
-            "
-            allow="
-              autoplay;
-              encrypted-media;
-              picture-in-picture;
-              fullscreen
-            "
-            allowFullScreen
-          />
+          {mounted && (
+            <iframe
+              src={
+                `https://www.youtube.com/embed/${videoId}` +
+                `?autoplay=1` +
+                `&mute=1` +
+                `&rel=0` +
+                `&playsinline=1` +
+                `&enablejsapi=1` +
+                `&origin=${encodeURIComponent(
+                  window.location.origin
+                )}`
+              }
+              title={title}
+              className="
+                absolute
+                inset-0
+                h-full
+                w-full
+              "
+              allow="
+                autoplay;
+                encrypted-media;
+                picture-in-picture;
+                fullscreen
+              "
+              allowFullScreen
+            />
+          )}
         </div>
 
         {/* =========================================
@@ -361,7 +362,6 @@ export default function LiveTVPopup({
             gap-3
             px-4
             py-3
-
             sm:px-5
           "
         >

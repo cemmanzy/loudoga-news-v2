@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import {
   FaFacebookF,
   FaInstagram,
@@ -7,119 +5,139 @@ import {
   FaTelegram,
   FaTiktok,
   FaYoutube,
+  FaXTwitter,
 } from "react-icons/fa6";
-
-import { FaXTwitter } from "react-icons/fa6";
 
 import ThemeToggle from "./ThemeToggle";
 
-export default function TopBar() {
-  const today = new Date().toLocaleDateString(
-    "en-US",
-    {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    }
-  );
+import { getSiteSettings } from "@/sanity/loaders/siteSettings";
+
+/* =========================================
+   SOCIAL ICON
+========================================= */
+
+interface SocialIconProps {
+  platform: string;
+}
+
+function SocialIcon({ platform }: SocialIconProps) {
+  const name = platform.toLowerCase().trim();
+
+  if (name.includes("facebook")) {
+    return <FaFacebookF />;
+  }
+
+  if (name.includes("instagram")) {
+    return <FaInstagram />;
+  }
+
+  if (name.includes("linkedin")) {
+    return <FaLinkedinIn />;
+  }
+
+  if (name.includes("telegram")) {
+    return <FaTelegram />;
+  }
+
+  if (name.includes("tiktok")) {
+    return <FaTiktok />;
+  }
+
+  if (name.includes("youtube")) {
+    return <FaYoutube />;
+  }
+
+  if (name === "x" || name.includes("twitter")) {
+    return <FaXTwitter />;
+  }
+
+  return null;
+}
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+export default async function TopBar() {
+  const settings = await getSiteSettings();
+
+  const today = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 
   return (
     <div className="bg-[#111827] text-white">
-
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2">
-
-        {/* Social Links */}
+      <div
+        className="
+          mx-auto
+          flex
+          max-w-7xl
+          items-center
+          justify-between
+          px-4
+          py-2
+        "
+      >
+        {/* =====================================
+            SOCIAL LINKS
+        ====================================== */}
 
         <div className="flex items-center gap-4">
+          {settings?.socialLinks?.map((social) => {
+            const icon = (
+              <SocialIcon platform={social.platform} />
+            );
 
-          <Link
-            href="https://x.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition hover:text-[#C8102E]"
-          >
-            <FaXTwitter />
-          </Link>
+            if (!icon || !social.url) {
+              return null;
+            }
 
-          <Link
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition hover:text-[#C8102E]"
-          >
-            <FaInstagram />
-          </Link>
+            return (
+              <a
+                key={social.platform}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.platform}
+                title={social.platform}
+                className="
+                  transition
+                  hover:text-[#C8102E]
+                "
+              >
+                {icon}
+              </a>
+            );
+          })}
 
-          <Link
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition hover:text-[#C8102E]"
-          >
-            <FaFacebookF />
-          </Link>
-
-          <Link
-            href="https://t.me"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition hover:text-[#C8102E]"
-          >
-            <FaTelegram />
-          </Link>
-
-          <Link
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition hover:text-[#C8102E]"
-          >
-            <FaLinkedinIn />
-          </Link>
-
-          <Link
-            href="https://tiktok.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition hover:text-[#C8102E]"
-          >
-            <FaTiktok />
-          </Link>
-
-          <Link
-            href="https://youtube.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition hover:text-[#C8102E]"
-          >
-            <FaYoutube />
-          </Link>
-
-          {/* Theme Toggle */}
+          {/* =====================================
+              THEME TOGGLE
+          ====================================== */}
 
           <span className="mx-1 h-5 w-px bg-white/20" />
 
           <ThemeToggle />
-
         </div>
 
-
-        {/* Date */}
+        {/* =====================================
+            DATE
+        ====================================== */}
 
         <div className="hidden text-sm md:block">
           {today}
         </div>
 
-
-        {/* Tagline */}
+        {/* =====================================
+            TAGLINE
+        ====================================== */}
 
         <div className="hidden text-sm lg:block">
           Truth • Accuracy • Integrity
         </div>
-
       </div>
-
     </div>
   );
 }

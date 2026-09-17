@@ -231,6 +231,7 @@ export default async function ArticlePage({
                 leading-[1.08]
                 tracking-tight
                 text-[#111827]
+                dark:text-white
 
                 sm:text-5xl
 
