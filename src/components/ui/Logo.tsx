@@ -42,7 +42,7 @@ export default function Logo({ size = "lg" }: LogoProps) {
     <Link
       href="/"
       className="flex items-center"
-      aria-label="Loudoga News"
+      aria-label="Loud Oga News"
     >
       {/* =================================
           BRAND ICONS
@@ -67,16 +67,14 @@ export default function Logo({ size = "lg" }: LogoProps) {
             height: current.mic,
           }}
         >
-          <FaMicrophoneAlt
-            size={current.micIcon}
-          />
+          <FaMicrophoneAlt size={current.micIcon} />
         </div>
 
         {/* Fan Logo */}
 
         <Image
           src="/images/loudoga-fan-logo-transparent.png"
-          alt="Loudoga News logo"
+          alt="Loud Oga News logo"
           width={current.logo}
           height={current.logo}
           priority
@@ -103,6 +101,9 @@ export default function Logo({ size = "lg" }: LogoProps) {
           <span className="text-[#C99700]">
             LOUD
           </span>
+
+          {/* Space between LOUD and OGA */}
+          <span className="mx-1" />
 
           <span className="text-[#111827] dark:text-white">
             OGA
@@ -134,7 +135,7 @@ export default function Logo({ size = "lg" }: LogoProps) {
             dark:text-gray-400
           `}
         >
-          Trusted Journalism • Breaking News
+          Real News • Loudest Voice
         </p>
       </div>
     </Link>

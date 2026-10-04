@@ -4,6 +4,7 @@ import { articleType } from "./documents/article";
 import { authorType } from "./documents/author";
 import { categoryType } from "./documents/category";
 import { tagType } from "./documents/tag";
+import { newsroomType } from "./documents/newsroom";
 import { subscriberType } from "./subscriber";
 import { newsletterType } from "./newsletter";
 
@@ -19,6 +20,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     authorType,
     categoryType,
     tagType,
+    newsroomType,
 
     // Objects
     seoType,

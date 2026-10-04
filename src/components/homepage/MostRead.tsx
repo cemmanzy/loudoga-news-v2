@@ -11,10 +11,14 @@ interface Props {
 export default function MostRead({
   articles,
 }: Props) {
+  const topArticles = articles.slice(0, 5);
+
   return (
     <aside
       className="
+        h-fit
         w-full
+        self-start
         rounded-2xl
         border
         border-gray-200
@@ -34,13 +38,11 @@ export default function MostRead({
         lg:p-5
       "
     >
-
       {/* =====================================
           HEADER
-          ===================================== */}
+      ====================================== */}
 
       <div className="mb-4 flex items-center justify-between">
-
         <h2
           className="
             border-l-4
@@ -70,12 +72,11 @@ export default function MostRead({
         >
           All Time
         </span>
-
       </div>
 
       {/* =====================================
           ARTICLES
-          ===================================== */}
+      ====================================== */}
 
       <div
         className="
@@ -84,9 +85,7 @@ export default function MostRead({
           dark:divide-gray-700
         "
       >
-
-        {articles.map((article, index) => (
-
+        {topArticles.map((article, index) => (
           <Link
             key={article.slug}
             href={`/article/${article.slug}`}
@@ -99,10 +98,9 @@ export default function MostRead({
               last:pb-2
             "
           >
-
             {/* =================================
                 NUMBER
-                ================================= */}
+            ================================== */}
 
             <span
               className="
@@ -124,19 +122,16 @@ export default function MostRead({
 
             {/* =================================
                 CONTENT
-                ================================= */}
+            ================================== */}
 
             <div className="min-w-0 flex-1">
-
               <h3
                 className="
                   font-bold
                   leading-5
                   text-gray-900
                   transition
-
                   group-hover:text-[#C8102E]
-
                   dark:text-white
                 "
               >
@@ -156,15 +151,10 @@ export default function MostRead({
                   ? "view"
                   : "views"}
               </p>
-
             </div>
-
           </Link>
-
         ))}
-
       </div>
-
     </aside>
   );
 }

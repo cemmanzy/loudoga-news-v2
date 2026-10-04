@@ -17,9 +17,7 @@ interface SocialIconProps {
   platform: string;
 }
 
-function SocialIcon({
-  platform,
-}: SocialIconProps) {
+function SocialIcon({ platform }: SocialIconProps) {
   const name = platform.toLowerCase();
 
   if (name.includes("facebook")) {
@@ -46,10 +44,7 @@ function SocialIcon({
     return <FaYoutube />;
   }
 
-  if (
-    name === "x" ||
-    name.includes("twitter")
-  ) {
+  if (name === "x" || name.includes("twitter")) {
     return <FaXTwitter />;
   }
 
@@ -57,11 +52,10 @@ function SocialIcon({
 }
 
 export default async function Footer() {
-  const [categories, settings] =
-    await Promise.all([
-      getCategories(),
-      getSiteSettings(),
-    ]);
+  const [categories, settings] = await Promise.all([
+    getCategories(),
+    getSiteSettings(),
+  ]);
 
   return (
     <footer
@@ -83,7 +77,6 @@ export default async function Footer() {
           max-w-7xl
           px-6
           py-16
-
           lg:py-20
         "
       >
@@ -91,11 +84,8 @@ export default async function Footer() {
           className="
             grid
             gap-12
-
             md:grid-cols-2
-
             lg:grid-cols-2
-
             xl:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]
           "
         >
@@ -170,45 +160,49 @@ export default async function Footer() {
               CATEGORIES
           ====================================== */}
 
-          <div>
-            <h3
-              className="
-                mb-6
-                text-lg
-                font-bold
-                text-white
-              "
-            >
-              Categories
-            </h3>
+          <div className="min-w-0">
+  <h3
+    className="
+      mb-6
+      text-lg
+      font-bold
+      text-white
+    "
+  >
+    Categories
+  </h3>
 
-            <ul
-              className="
-                grid
-                grid-cols-2
-                gap-x-5
-                gap-y-3
-                text-sm
-                text-gray-400
-              "
-            >
-              {categories.map(
-                (category) => (
-                  <li key={category._id}>
-                    <Link
-                      href={`/category/${category.slug}`}
-                      className="
-                        transition
-                        hover:text-[#C8102E]
-                      "
-                    >
-                      {category.title}
-                    </Link>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
+  <ul
+    className="
+      grid
+      grid-cols-2
+      gap-x-6
+      gap-y-3
+      text-sm
+      text-gray-400
+    "
+  >
+    {categories.map((category) => (
+      <li
+        key={category._id}
+        className="min-w-0"
+      >
+        <Link
+          href={`/category/${category.slug}`}
+          className="
+            block
+            break-all
+            leading-5
+            transition
+            hover:text-[#C8102E]
+          "
+        >
+          {category.title}
+        </Link>
+      </li>
+    ))}
+  </ul>
+</div>
 
           {/* =====================================
               QUICK LINKS
@@ -254,6 +248,18 @@ export default async function Footer() {
                   "
                 >
                   About Us
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  href="/newsroom"
+                  className="
+                    transition
+                    hover:text-[#C8102E]
+                  "
+                >
+                  Newsroom
                 </Link>
               </li>
 
@@ -410,8 +416,8 @@ export default async function Footer() {
                 !settings?.phone &&
                 !settings?.address && (
                   <p className="leading-6 text-gray-500">
-                    Contact details will appear here
-                    once they are added in Sanity.
+                    Contact details will appear here once
+                    they are added in Sanity.
                   </p>
                 )}
             </div>
@@ -441,68 +447,63 @@ export default async function Footer() {
                 text-gray-400
               "
             >
-              Follow Loud Oga News for breaking
-              stories, updates and exclusive
-              reports.
+              Follow Loud Oga News for breaking stories,
+              updates and exclusive reports.
             </p>
 
             <div className="flex flex-wrap gap-3">
-              {settings?.socialLinks?.map(
-                (social) => {
-                  const icon = (
-                    <SocialIcon
-                      platform={social.platform}
-                    />
-                  );
+              {settings?.socialLinks?.map((social) => {
+                const icon = (
+                  <SocialIcon
+                    platform={social.platform}
+                  />
+                );
 
-                  return (
-                    <a
-                      key={social.platform}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.platform}
-                      title={social.platform}
-                      className="
-                        flex
-                        h-10
-                        w-10
-                        items-center
-                        justify-center
-                        rounded-full
-                        border
-                        border-gray-700
-                        bg-[#111827]
-                        text-gray-300
-                        transition
-                        hover:border-[#C8102E]
-                        hover:bg-[#C8102E]
-                        hover:text-white
-                      "
-                    >
-                      {icon || (
-                        <span
-                          className="
-                            text-xs
-                            font-bold
-                            uppercase
-                          "
-                        >
-                          {social.platform.slice(
-                            0,
-                            2
-                          )}
-                        </span>
-                      )}
-                    </a>
-                  );
-                }
-              )}
+                return (
+                  <a
+                    key={social.platform}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.platform}
+                    title={social.platform}
+                    className="
+                      flex
+                      h-10
+                      w-10
+                      items-center
+                      justify-center
+                      rounded-full
+                      border
+                      border-gray-700
+                      bg-[#111827]
+                      text-gray-300
+                      transition
+                      hover:border-[#C8102E]
+                      hover:bg-[#C8102E]
+                      hover:text-white
+                    "
+                  >
+                    {icon || (
+                      <span
+                        className="
+                          text-xs
+                          font-bold
+                          uppercase
+                        "
+                      >
+                        {social.platform
+                          .slice(0, 2)}
+                      </span>
+                    )}
+                  </a>
+                );
+              })}
 
               {!settings?.socialLinks?.length && (
                 <p className="text-sm text-gray-500">
-                  Social links will appear here once
-                  they are added in Sanity.
+                  Social links will appear here once they
+                  are added in Sanity.
                 </p>
               )}
             </div>
@@ -526,7 +527,6 @@ export default async function Footer() {
             py-6
             text-sm
             text-gray-500
-
             md:flex-row
             md:items-center
             md:justify-between
